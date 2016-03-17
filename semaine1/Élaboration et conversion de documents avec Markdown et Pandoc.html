@@ -1,0 +1,1790 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="par Jean-Daniel Bonjour, EPFL-ENAC-IT, © Creative Commons BY-SA">
+  <title>Élaboration et conversion de documents avec Markdown et Pandoc</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="%C3%89laboration%20et%20conversion%20de%20documents%20avec%20Markdown%20et%20Pandoc_files/markdown-pandoc.css" type="text/css">
+  <script src="%C3%89laboration%20et%20conversion%20de%20documents%20avec%20Markdown%20et%20Pandoc_files/MathJax.js" type="text/javascript"></script>
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">#wikiwand-ext-switch-button {
+      position:fixed;
+      bottom:-100px;
+      right:10px;
+      width:227px;
+      height:48px;
+      z-index:200000;
+      cursor:pointer;
+  }
+
+  .wikiwand-ext-switch-button-RTL {
+      right:auto !important;
+      left:60px;
+  }
+  #wikiwand-ext-switch-link {
+      cursor:pointer;
+  }
+  #wikiwand-ext-loading {
+      position:fixed;
+      width:120px;
+      height:120px;
+      margin-left:-60px;
+      margin-top:-60px;
+      top:50%;
+      left:50%;
+      z-index:100000;
+      opacity:0;
+  }</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax:focus, body :focus .MathJax {display: inline-table}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Blank; src: url('about:blank')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px none; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div style="display: none;" id="MathJax_Message"></div>
+<div id="header">
+<h1 class="title">Élaboration et conversion de documents avec Markdown et Pandoc</h1>
+<h2 class="author">par <script type="text/javascript">
+<!--
+h='&#x65;&#112;&#102;&#108;&#46;&#x63;&#104;';a='&#64;';n='&#106;&#x65;&#x61;&#110;&#x2d;&#100;&#x61;&#110;&#x69;&#x65;&#108;&#46;&#98;&#x6f;&#110;&#106;&#x6f;&#x75;&#114;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'Jean-Daniel Bonjour'+'<\/'+'a'+'>');
+// -->
+</script><a href="mailto:jean-daniel.bonjour@epfl.ch">Jean-Daniel Bonjour</a><noscript>&#74;&#x65;&#x61;&#110;&#x2d;&#68;&#x61;&#110;&#x69;&#x65;&#108;&#32;&#66;&#x6f;&#110;&#106;&#x6f;&#x75;&#114;&#32;&#40;&#106;&#x65;&#x61;&#110;&#x2d;&#100;&#x61;&#110;&#x69;&#x65;&#108;&#46;&#98;&#x6f;&#110;&#106;&#x6f;&#x75;&#114;&#32;&#x61;&#116;&#32;&#x65;&#112;&#102;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#104;&#x29;</noscript>, EPFL-ENAC-IT, <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.fr">© Creative Commons BY-SA</a></h2>
+<h3 class="date">(révision 16.12.2014)</h3>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a><ul>
+<li><a href="#avant-propos"><span class="toc-section-number">1.1</span> Avant-propos</a></li>
+<li><a href="#quelques-r%C3%A9f%C3%A9rences"><span class="toc-section-number">1.2</span> Quelques références</a></li>
+</ul></li>
+<li><a href="#le-langage-markdown"><span class="toc-section-number">2</span> Le langage Markdown</a><ul>
+<li><a href="#g%C3%A9n%C3%A9ralit%C3%A9s"><span class="toc-section-number">2.1</span> Généralités</a></li>
+<li><a href="#syntaxe-de-base-du-langage-markdown"><span class="toc-section-number">2.2</span> Syntaxe de base du langage Markdown</a><ul>
+<li><a href="#paragraphes-sauts-de-ligne"><span class="toc-section-number">2.2.1</span> Paragraphes, sauts de ligne</a></li>
+<li><a href="#titres"><span class="toc-section-number">2.2.2</span> Titres</a></li>
+<li><a href="#traits-horizontaux"><span class="toc-section-number">2.2.3</span> Traits horizontaux</a></li>
+<li><a href="#styles-et-blocs"><span class="toc-section-number">2.2.4</span> Styles et blocs</a></li>
+<li><a href="#liens"><span class="toc-section-number">2.2.5</span> Liens</a></li>
+<li><a href="#images-inlines"><span class="toc-section-number">2.2.6</span> Images inlines</a></li>
+<li><a href="#d%C3%A9finition-de-liens-ou-dimages-par-r%C3%A9f%C3%A9rence-implicite"><span class="toc-section-number">2.2.7</span> Définition de liens ou d'images par référence implicite</a></li>
+<li><a href="#listes"><span class="toc-section-number">2.2.8</span> Listes</a></li>
+<li><a href="#inclusion-de-code-html-dans-un-fichier-markdown"><span class="toc-section-number">2.2.9</span> Inclusion de code HTML dans un fichier Markdown</a></li>
+<li><a href="#%C3%A9chappement-de-certains-caract%C3%A8res"><span class="toc-section-number">2.2.10</span> Échappement de certains caractères</a></li>
+</ul></li>
+<li><a href="#installation-et-utilisation-du-convertisseur-markdown-original"><span class="toc-section-number">2.3</span> Installation et utilisation du convertisseur Markdown original</a></li>
+</ul></li>
+<li><a href="#le-convertisseur-pandoc"><span class="toc-section-number">3</span> Le convertisseur Pandoc</a><ul>
+<li><a href="#g%C3%A9n%C3%A9ralit%C3%A9s-1"><span class="toc-section-number">3.1</span> Généralités</a></li>
+<li><a href="#extensions-%C3%A0-la-syntaxe-markdown-impl%C3%A9ment%C3%A9es-par-pandoc"><span class="toc-section-number">3.2</span> Extensions à la syntaxe Markdown implémentées par Pandoc</a><ul>
+<li><a href="#encodage_utf8"><span class="toc-section-number">3.2.1</span> Encodage de fichiers</a></li>
+<li><a href="#sauts-de-ligne"><span class="toc-section-number">3.2.2</span> Sauts de ligne</a></li>
+<li><a href="#titres-1"><span class="toc-section-number">3.2.3</span> Titres</a></li>
+<li><a href="#styles_blocs"><span class="toc-section-number">3.2.4</span> Styles et blocs</a></li>
+<li><a href="#tex_math"><span class="toc-section-number">3.2.5</span> Formules TeX Math</a></li>
+<li><a href="#figures"><span class="toc-section-number">3.2.6</span> Figures</a></li>
+<li><a href="#listes-1"><span class="toc-section-number">3.2.7</span> Listes</a></li>
+<li><a href="#notes_bas_page"><span class="toc-section-number">3.2.8</span> Notes de bas de page</a></li>
+<li><a href="#tableaux"><span class="toc-section-number">3.2.9</span> Tableaux</a></li>
+<li><a href="#metadonnees_pandoc"><span class="toc-section-number">3.2.10</span> Métadonnées du document (bloc de titre)</a></li>
+<li><a href="#comportement-de-pandoc-par-rapport-au-code-html-inclus"><span class="toc-section-number">3.2.11</span> Comportement de Pandoc par rapport au code HTML inclus</a></li>
+<li><a href="#gestion-de-citations-et-r%C3%A9f%C3%A9rences-bibliographiques"><span class="toc-section-number">3.2.12</span> Gestion de citations et références bibliographiques</a></li>
+<li><a href="#exemples_slide_shows"><span class="toc-section-number">3.2.13</span> Réalisation de slide shows HTML</a></li>
+<li><a href="#possibilit%C3%A9s-de-pandoc-en-relation-avec-texlatex"><span class="toc-section-number">3.2.14</span> Possibilités de Pandoc en relation avec TeX/LaTeX</a></li>
+<li><a href="#templates_pandoc"><span class="toc-section-number">3.2.15</span> Usage de templates Pandoc</a></li>
+<li><a href="#autres-possibilit%C3%A9s-en-relation-avec-pandoc"><span class="toc-section-number">3.2.16</span> Autres possibilités en relation avec Pandoc</a></li>
+</ul></li>
+<li><a href="#installation-de-pandoc"><span class="toc-section-number">3.3</span> Installation de Pandoc</a><ul>
+<li><a href="#sous-gnulinux"><span class="toc-section-number">3.3.1</span> Sous GNU/Linux</a></li>
+<li><a href="#sous-windows"><span class="toc-section-number">3.3.2</span> Sous Windows</a></li>
+<li><a href="#sous-mac-os-x"><span class="toc-section-number">3.3.3</span> Sous Mac OS X</a></li>
+<li><a href="#quel-que-soit-le-syst%C3%A8me-dexploitation"><span class="toc-section-number">3.3.4</span> Quel que soit le système d'exploitation</a></li>
+</ul></li>
+<li><a href="#commande_pandoc"><span class="toc-section-number">3.4</span> Utilisation du convertisseur Pandoc</a><ul>
+<li><a href="#syntaxe-de-la-commande"><span class="toc-section-number">3.4.1</span> Syntaxe de la commande</a></li>
+<li><a href="#options-principales-de-la-commande"><span class="toc-section-number">3.4.2</span> Options principales de la commande</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#editeurs_markdown"><span class="toc-section-number">4</span> Quelques éditeurs adaptés à l'édition Markdown</a></li>
+</ul>
+</div>
+<h1 id="introduction"><a href="#introduction"><span class="header-section-number">1</span> Introduction</a></h1>
+<h2 id="avant-propos"><a href="#avant-propos"><span class="header-section-number">1.1</span> Avant-propos</a></h2>
+<p>Cette page web décrit le langage de balisage léger d'écriture de documents <a href="http://daringfireball.net/projects/markdown/"><strong>Markdown</strong></a> (<em>markup language</em>) ainsi que l'utilisation du convertisseur <a href="http://johnmacfarlane.net/pandoc/"><strong>Pandoc</strong></a>, notamment les très nombreuses, riches et utiles <strong>extensions</strong> apportées à la syntaxe Markdown par ce convertisseur.</p>
+<p>Cette page a été elle-même rédigée en langage Markdown (vous pouvez examiner son <a href="http://enacit1.epfl.ch/markdown-pandoc/index.md">code source</a>)
+ en faisant un large usage des extensions offertes par Pandoc (dont il 
+faut utiliser une version ≥ 1.11.1). Elle a été convertie en HTML avec 
+la commande <code>pandoc -s -N --toc --mathjax -c markdown-pandoc.css -o index.html index.md</code>. Son rendu web s'appuie en outre sur une <a href="http://enacit1.epfl.ch/markdown-pandoc/markdown-pandoc.css">feuille de style</a> CSS spécifique que nous avons réalisée et qui est plutôt orientée impression.</p>
+<p>Vous pouvez aussi <mark>télécharger la <a href="http://enacit1.epfl.ch/markdown-pandoc/index.epub">version e-book</a> (au format ePub)</mark> de ce document, à consulter par exemple avec l'excellente liseuse libre <a href="http://calibre-ebook.com/">Calibre</a>.</p>
+<p>Une dernière remarque : ne soyez pas effrayé par le volume de cette 
+documentation ! À l'usage, vous constaterez que les concepts présentés 
+ici sont finalement extrêmement <em>naturels</em>, et que Markdown et Pandoc sont très faciles à mettre en oeuvre ☺</p>
+<h2 id="quelques-références"><a href="#quelques-r%C3%A9f%C3%A9rences"><span class="header-section-number">1.2</span> Quelques références</a></h2>
+<p><strong>Markdown</strong></p>
+<ul>
+<li>définition originale de Markdown : <a href="http://daringfireball.net/projects/markdown/">home</a> | <a href="http://daringfireball.net/projects/markdown/syntax">syntaxe</a> de base (ou en <a href="http://michelf.ca/projets/php-markdown/syntaxe/">français</a>) | convertisseur <a href="http://daringfireball.net/projects/markdown/dingus">en ligne</a> (ou en <a href="http://michelf.ca/projets/php-markdown/banc-d%27essai/">français</a>) |</li>
+<li>projet <strong>CommonMark</strong> de standardisation de la syntaxe Markdown : <a href="http://commonmark.org/">site</a> web | <a href="http://spec.commonmark.org/">spécification</a> |</li>
+<li>reference cards &amp; cheat sheets relatifs à Markdown : <a href="http://scadahacker.com/library/Documents/Cheat_Sheets/HTML%20-%20Markdown.pdf">Jeremy Stretch</a> | <a href="http://blog.lib.umn.edu/crosb002/leadership/Markdown_Cheat_Sheet.pdf">HowTube</a> | <a href="http://code.ahren.org/markdown-cheatsheet">Ahren Code</a> | <a href="http://warpedvisions.org/projects/markdown-cheat-sheet/">warpedvision</a> |</li>
+<li>sur Wikipedia : article <a data-noreplace="1" data-new-link="http://www.wikiwand.com/en/Markdown" href="http://www.wikiwand.com/en/Markdown">Markdown</a> avec brève description de la syntaxe | <a data-noreplace="1" data-new-link="http://www.wikiwand.com/en/Markdown#Extensions" href="http://www.wikiwand.com/en/Markdown#Extensions">extensions</a> à Markdown |</li>
+<li>éditeurs Markdown en ligne avec rendu en temps réel : <a href="https://stackedit.io/">StackEdit</a> | <a href="http://dillinger.io/">Dillinger</a> | <a href="http://hashify.me/">Hashify</a> | <a href="http://jrham.es/instantmark/">InstantMark</a> | <a href="http://joncom.be/experiments/markdown-editor/edit/">JonCombe</a> | <a href="http://markdown.pioul.fr/">Pioul</a> | <a href="http://softwaremaniacs.org/playground/showdown-highlight/">Showdown</a> |</li>
+<li>article sur Markdown par Nicolas Borboën dans la revue <a href="http://flashinformatique.epfl.ch/spip.php?article2629">Flash Informatique EPFL 1/2013</a></li>
+</ul>
+<p><strong>Pandoc</strong></p>
+<ul>
+<li>site officiel Pandoc : <a href="http://johnmacfarlane.net/pandoc/">home</a> | les <a href="http://johnmacfarlane.net/pandoc/README.html#pandocs-markdown">extensions</a> apportées au langage Markdown | <a href="http://johnmacfarlane.net/pandoc/demos.html">exemples</a> de fichiers et conversions | convertisseur <a href="http://johnmacfarlane.net/pandoc/try/">en ligne</a> (limité à 1000 caractères) |</li>
+<li>reference cards &amp; cheat sheets relatifs à Pandoc : <a href="https://github.com/dsanson/Pandoc.tmbundle/blob/master/Support/doc/cheatsheet.markdown">DSanson</a> |</li>
+<li>forum de discussion sur Pandoc : sur <a href="http://groups.google.com/group/pandoc-discuss">groups.google</a></li>
+<li>article sur Pandoc par Jean-Daniel Bonjour dans la revue <a href="http://flashinformatique.epfl.ch/spip.php?article2658">Flash Informatique EPFL 4/2013</a> (aussi accessible <a href="http://enacit1.epfl.ch/markdown-pandoc/article-fi-juillet-2013.html">ici</a>)</li>
+</ul>
+<p><strong>Autres langages de balisage légers...</strong></p>
+<ul>
+<li>article <a data-noreplace="1" data-new-link="http://www.wikiwand.com/en/Lightweight_markup_languages" href="http://www.wikiwand.com/en/Lightweight_markup_languages">Wikipedia</a> sur le sujet</li>
+<li>la syntaxe <a href="http://docutils.sourceforge.net/rst.html">reST</a> (reStructuredText) dont s'inspire parfois Pandoc : une <a href="http://www.unexpected-vortices.com/doc-notes/markdown-and-rest-compared.html">comparaison</a> entre Pandoc et reST |</li>
+<li>la syntaxe <a href="http://www.mediawiki.org/wiki/Help:Formatting">MediaWiki</a> utilisée notamment par Wikipedia</li>
+<li>le format <a href="http://asciidoc.org/">AsciiDoc</a> : article de Pascal Fabbri dans la revue <a href="http://flashinformatique.epfl.ch/spip.php?article2527">Flash Informatique EPFL 3/2012</a></li>
+<li>comparaison de langages de balisage légers : <a href="http://hyperpolyglot.org/lightweight-markup">tableau</a> de comparaison entre Markdown, MediaWiki, Wikidot, LaTeX | article de <a href="http://fgallaire.flext.net/comparaison-langage-balisage-markup-lightweight-leger-txt2tags-pandoc-docutils-asciidoc-deplate-stx2any-aft-markdown-textile/">FGallaire</a> |</li>
+</ul>
+<h1 id="le-langage-markdown"><a href="#le-langage-markdown"><span class="header-section-number">2</span> Le langage Markdown</a></h1>
+<h2 id="généralités"><a href="#g%C3%A9n%C3%A9ralit%C3%A9s"><span class="header-section-number">2.1</span> Généralités</a></h2>
+<p><em>«A Markdown-formatted document should be publishable as-is, as 
+plain text, without looking like it’s been marked up with tags or 
+formatting instructions.»</em> (<a href="http://daringfireball.net/projects/markdown/syntax#philosophy">John Gruber</a>)</p>
+<p>Markdown est une syntaxe légère d'écriture de documents définie en 2004 par <a data-noreplace="1" data-new-link="http://www.wikiwand.com/en/John_Gruber" href="http://www.wikiwand.com/en/John_Gruber">John Gruber</a> avec la collaboration de <a data-noreplace="1" data-new-link="http://www.wikiwand.com/en/Aaron_Swartz" href="http://www.wikiwand.com/en/Aaron_Swartz">Aaron Swartz</a>.
+ Elle a été conçue pour être aussi facile à lire et à écrire que 
+possible. D'importants outils (IPython Notebook...) et de nombreux sites
+ Internet (<a href="https://github.com/">GitHub</a>, <a href="http://stackexchange.com/">StackExchange</a>,
+ Reddit, Tumblr...) l'utilisent comme syntaxe d'édition. Mais en raison 
+du caractère non formel de la définition originale de cette syntaxe par 
+Gruber, de certaines ambiguïtés et du besoin d'évolution de ce format, 
+un projet de standardisation débute en 2014 sous la dénomination <strong><a href="http://commonmark.org/">CommonMark</a></strong>.</p>
+<p>Bien que cette syntaxe permette la conversion en différents formats 
+de documents, elle est principalement orientée vers la production de 
+documents (X)HTML simples, raison pour laquelle nous indiquerons souvent
+ dans ce document les balises (X)HTML résultant de la conversion 
+Markdown dans ce format.</p>
+<h2 id="syntaxe-de-base-du-langage-markdown"><a href="#syntaxe-de-base-du-langage-markdown"><span class="header-section-number">2.2</span> Syntaxe de base du langage Markdown</a></h2>
+<h3 id="paragraphes-sauts-de-ligne"><a href="#paragraphes-sauts-de-ligne"><span class="header-section-number">2.2.1</span> Paragraphes, sauts de ligne</a></h3>
+<p>Dans la syntaxe Markdown, un <strong>paragraphe</strong> (<code>&lt;p&gt;...&lt;/p&gt;</code>
+ en HTML) est constitué d'une ligne ou de plusieurs lignes consécutives.
+ Le passage au paragraphe suivant s'effectue en introduisant une ou 
+plusieurs lignes vides.</p>
+<p>Pour effectuer un <strong>saut de ligne</strong> à l'intérieur d'un paragraphe (<code>&lt;br /&gt;</code> en HTML), il faut introduire 2 ou davantage de caractères <em>espaces</em> à la fin de la ligne (avant le saut à la ligne).</p>
+<!-- Ci-dessous c'est le seul endroit où je fais, à titre de démonstration, du bi-colonne
+     par <TABLE>. Partout ailleurs dans ce document je fais du bi-colonne par <DIV> -->
+
+<table class="bicol"><tbody><tr><td>
+
+<pre><code>Voici un paragraphe↲
+de texte avec⎕⎕↲  
+un saut de ligne.↲
+↲
+Puis un autre paragraphe...</code></pre>
+</td><td class="o">
+
+<p>Voici un paragraphe de texte avec<br>un saut de ligne.</p>
+<p>Puis un autre paragraphe...</p>
+</td></tr></tbody></table>
+
+
+
+<h3 id="titres"><a href="#titres"><span class="header-section-number">2.2.2</span> Titres</a></h3>
+<p>Un titre consiste en un paragraphe débutant par 1 à 6 caractères <em>dièses</em> <code>#</code> suivi(s) de l'intitulé proprement dit du titre. Le nombre de <code>#</code> débutant la ligne spécifie le niveau du titre : par exemple <code>### Titre...</code> est un titre de 3e niveau (<code>&lt;h3&gt;Titre...&lt;/h3&gt;</code>). On peut facultativement terminer la ligne de titre par des dièses <code>#</code> (peu importe leur nombre).</p>
+<p>Une autre syntaxe peut être utilisée pour les titres de premier et second niveau. Pour le 1er niveau (<code>&lt;h1&gt;</code>), on peut saisir le texte du <code>Titre</code> directement suivi d'une ligne composée d'un ou plusieurs caractères égal <code>=</code> puis d'une ligne vide. Pour le 2ème niveau (<code>&lt;h2&gt;</code>), le titre sera suivi d'une ligne composée d'un ou plusieurs tirets <code>-</code></p>
+<p>Notez finalement que l'on peut faire usage de styles et liens (techniques présentées plus bas) à l'intérieur des titres.</p>
+<div class="g">
+<pre><code># Titre de niveau 1 #####################
+
+Autre syntaxe pour niveau 1
+===========================
+
+## Titre de niveau 2
+
+Syntaxe ⎯alternative⎯ pour niveau 2
+-----------------------------------
+
+### Titre de niveau 3 incluant [un lien](#)
+
+#### Titre de niveau 4</code></pre>
+</div>
+<div class="do">
+
+<!-- je triche ici en fabriquant le résultat afin que ces titres n'apparaissent pas dans la TOC -->
+<h1 style="margin-top: 6px;">
+Titre de niveau 1
+</h1>
+<h1 style="margin-top: 6px;">
+Autre syntaxe pour niveau 1
+</h1>
+<h2 style="margin-top: 4px;">
+Titre de niveau 2
+</h2>
+<h2 style="margin-top: 4px;">
+Syntaxe <i>alternative</i> pour niveau 2
+</h2>
+<h3 style="margin-top: 4px;">
+Titre de niveau 3 incluant <a href="#">un lien</a>
+</h3>
+<h4>
+Titre de niveau 4
+</h4>
+
+</div>
+<div class="f"></div>
+
+
+
+<h3 id="traits-horizontaux"><a href="#traits-horizontaux"><span class="header-section-number">2.2.3</span> Traits horizontaux</a></h3>
+<p>Un trait horizontal (<code>&lt;hr /&gt;</code>) est défini par un 
+nouveau paragraphe (donc précédé et suivi d'1 ligne vide au moins) 
+comportant au minimum 3 caractères de type tiret <code>-</code>, souligné <code>_</code> ou étoile <code>*</code>, optionnellement séparés par des <em>espaces</em>.</p>
+<div class="g">
+<pre><code>------------
+
+Paragraphe...
+
+*********
+
+Paragraphe...
+
+* * *</code></pre>
+</div>
+<div class="do">
+<hr>
+<p>Paragraphe...</p>
+<hr>
+<p>Paragraphe...</p>
+<hr>
+</div>
+<div class="f">
+
+</div>
+<h3 id="styles-et-blocs"><a href="#styles-et-blocs"><span class="header-section-number">2.2.4</span> Styles et blocs</a></h3>
+<p>Les <strong>styles</strong> de base sont définis par la syntaxe suivante :</p>
+<ul>
+<li>une portion de texte en italique (<code>&lt;em&gt;</code>) sera bordée à gauche et à droite par le caractère <code>_</code> ou <code>*</code></li>
+<li>le texte en gras (<code>&lt;strong&gt;</code>) sera bordé à gauche et à droite par 2 caractères <code>**</code> ou <code>__</code></li>
+</ul>
+<p>Pour insérer du <strong>code inline</strong> (<code>&lt;code&gt;...&lt;/code&gt;</code> ⇒ texte en chasse fixe), on placera celui-ci entre <code>` `</code>
+ (accents graves), et ceux-ci seront doublés si ce code contient 
+lui-même un ou plusieurs accents graves. Dans ce code inline, les 
+directives de formatage Markdown <code>_</code> <code>*</code> ainsi que les balises HTML ne sont pas interprétées mais restituées telles quelles.</p>
+<div class="g">
+<pre><code>Mots en ⎯italique **gras**⎯ ou en **gras ⎯italique⎯**,
+du `code contenant des
+*balises* HTML, p.ex. &lt;u&gt; &lt;span&gt;` ...
+
+Mais _ ceci _ ou ** cela ** ne va pas (en raison d'espaces) !</code></pre>
+</div>
+<div class="do">
+<p>Mots en <em>italique <strong>gras</strong></em> ou en <strong>gras <em>italique</em></strong>, du <code>code contenant des *balises*, p.ex. &lt;u&gt; &lt;span&gt;</code> ...</p>
+<p>Mais _ ceci _ ou ** cela ** ne va pas (en raison d'espaces) !</p>
+</div>
+<div class="f">
+
+</div>
+<p>Pour définir un <strong>bloc de code</strong> (structure <code>&lt;pre&gt;...&lt;/pre&gt;</code> en HTML), on fera précéder chaque ligne de 1 ou plusieurs <em>tab</em> ou de 4 <em>espaces</em> ou plus. Notez que dès le 2ème <em>tab</em> ou le 5ème <em>espace</em>, ces caractères participent à l'indentation du code ! Dans un tel bloc, les directives de formatage Markdown <code>_</code> <code>*</code>, les balises HTML ainsi que les caractères HTML (p.ex. <code>&amp;eacute;</code>, <code>&amp;amp;</code>) ne sont pas non plus interprétées (les caractères <code>&lt;</code> <code>&gt;</code> <code>&amp;</code> étant affichés tels quels).</p>
+<div class="g">
+<pre><code> ⟼ Sur le pont d'Avignon
+ ⟼ ⎕⎕L'on y danse, l'on y danse,
+ ⟼ Sur le pont d'Avignon
+ ⟼ ⎕⎕L'on y danse tous en rond.</code></pre>
+</div>
+<div class="do">
+<pre><code>Sur le pont d'Avignon
+  L'on y danse, l'on y danse,
+Sur le pont d'Avignon
+  L'on y danse tous en rond.</code></pre>
+</div>
+<div class="f">
+
+</div>
+<p>Pour <strong>décaler à droite</strong> un paragraphe (on appelle ça 
+un bloc de "citation", hérité de l'email), on fera précéder la première 
+ligne du paragraphe (facultativement les suivantes) par le caractère <code>&gt;</code>. En HTML cela générera un bloc <code>&lt;blockquote&gt;</code>. On peut faire des citations/décalages de 2ème niveau avec <code>&gt;&gt;</code> ou <code>&gt; &gt;</code>, de 3ème niveau avec <code>&gt;&gt;&gt;</code> ou <code>&gt; &gt; &gt;</code>, et ainsi de suite.</p>
+<p>Rien n'interdit de faire usage de toute autre possibilité Markdown 
+dans les citations (styles Markdown, titres, listes, blocs de code, 
+ainsi que balises HTML...).</p>
+<div class="g">
+<pre><code>Paragraphe normal
+
+&gt; Début du bloc de citation
+&gt;
+&gt; * élément de liste
+&gt; * second élément
+&gt;
+&gt;&gt; Décalage de 2ème niveau, usage de _styles_
+Markdown, &lt;u&gt;balises&lt;/u&gt; HTML
+&gt;
+&gt; ⟼ Bloc de code dans la citation
+
+Retour à l'alignement normal</code></pre>
+</div>
+<div class="do">
+<p>Paragraphe normal</p>
+<blockquote>
+<p>Début du bloc de citation</p>
+<ul>
+<li>élément de liste</li>
+<li>second élément</li>
+</ul>
+<blockquote>
+<p>Décalage de 2ème niveau, usage de <em>styles</em> Markdown, <u>balises</u> HTML</p>
+</blockquote>
+<pre><code>Bloc de code dans la citation</code></pre>
+</blockquote>
+<p>Retour à l'alignement normal</p>
+</div>
+<div class="f">
+
+</div>
+<h3 id="liens"><a href="#liens"><span class="header-section-number">2.2.5</span> Liens</a></h3>
+<p>Markdown propose deux techniques de définition de liens.</p>
+<p><strong>A)</strong> Pour définir un <strong>lien inline</strong> (technique HTML classique du lien "au fil du texte") :</p>
+<ul>
+<li><p>si l'<code>URL</code> est ancrée à un <code>texte</code>, on utilise la syntaxe : <code>[texte](URL "titre optionnel")</code><br> • notez bien l'usage respectif des crochets et parenthèses, ainsi que l'absence d'<em>espace</em> entre <code>]</code> et <code>(</code><br> • le <code>titre optionnel</code> est le texte qui s'affichera lorsque le curseur survole le lien<br> • le <code>texte</code> d'ancrage peut bien entendu faire l'objet d'un formatage Markdown (p.ex. gras, italique...)</p></li>
+<li><p>si l'on veut insérer au fil du paragraphe une <code>URL</code> (non ancrée à un texte, mais présentée telle quelle et cliquable), on utilise simplement la syntaxe : <code>&lt;URL&gt;</code> (donc entre signes <code>&lt;</code> et <code>&gt;</code>)<br> • pour définir des adresses emails cliquables, il n'est pas nécessaire de les préfixer par <code>mailto:</code></p></li>
+</ul>
+<div class="g">
+<pre><code>Lien externe : l' [EPFL](http://www.epfl.ch "École
+polytechnique fédérale de Lausanne") se trouve...  
+Web: &lt;http://www.epfl.ch&gt;, Email: &lt;accueil@epfl.ch&gt;
+
+Lien interne : vers le [haut de la page](#)</code></pre>
+</div>
+<div class="do">
+<p>Lien externe : l' <a href="http://www.epfl.ch/" title="École polytechnique fédérale de Lausanne">EPFL</a> se trouve...<br>Web : <a href="http://www.epfl.ch/">http://www.epfl.ch</a>, Email: <script type="text/javascript">
+<!--
+h='&#x65;&#112;&#102;&#108;&#46;&#x63;&#104;';a='&#64;';n='&#x61;&#x63;&#x63;&#x75;&#x65;&#x69;&#108;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+e+'<\/'+'a'+'>');
+// -->
+</script><a href="mailto:accueil@epfl.ch">accueil@epfl.ch</a><noscript>&#x61;&#x63;&#x63;&#x75;&#x65;&#x69;&#108;&#32;&#x61;&#116;&#32;&#x65;&#112;&#102;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#104;</noscript></p>
+<p>Lien interne : vers le <a href="#">haut de la page</a></p>
+</div>
+<div class="f">
+
+</div>
+<p>Remarque : si vous examinez le code HTML, vous constaterez que les liens de type <code>&lt;adresse_email&gt;</code>
+ sont automatiquement encodés (et même associés par Pandoc à du 
+JavaScript) et sont de ce fait relativement résistant aux robots de spam
+ !</p>
+<p><strong>B)</strong> Markdown offre en outre la possibilité très intéressante de définir des <strong>liens par référence</strong>, explicite ou implicite. On réalise cela en deux étapes (ci-dessous la référenciation explicite) :</p>
+<ol style="list-style-type: decimal">
+<li><p>d'une part on définit, n'importe où dans le fichier, l'<code>URL</code> et un label <code>urlId</code> permettant de s'y référer selon la syntaxe : <code>[urlId]: URL "titre optionnel"</code><br> • notez bien le double point <code>:</code> suivant directement le crochet <code>]</code><br> • l'<code>URL</code> peut optionnellement être écrite entre <code>&lt; &gt;</code><br> • sachez aussi que le label <code>urlId</code> n'est pas case-sensitive et peut contenir des espaces !<br> • ces 3 champs peuvent optionnellement être définis sur 2-3 lignes (mais sans intercaler de ligne vide)</p></li>
+<li><p>au fil du texte (inline), on ancre simplement par référence cette <code>URL</code> à un <code>texte</code> avec : <code>[texte][urlId]</code><br> • notez bien que l'on n'utilise ici que des crochets, ainsi que l'absence d'<em>espace</em> entre <code>]</code> et <code>[</code></p></li>
+</ol>
+<div class="g">
+<pre><code>La [faculté **ENAC**][webEnac] forme des ing. et architectes...  
+L'[ENAC][webEnac] est constituée de...
+
+[webEnac]: http://enac.epfl.ch "Environnement naturel..."</code></pre>
+</div>
+<div class="do">
+<p>La <a href="http://enac.epfl.ch/" title="Environnement naturel...">faculté <strong>ENAC</strong></a> forme des ing. et architectes...<br>L'<a href="http://enac.epfl.ch/" title="Environnement naturel...">ENAC</a> est constituée de...</p>
+</div>
+<div class="f">
+
+</div>
+<p>Le grand intérêt de cette seconde technique de "liens par référence" 
+est de pouvoir déporter les URLs en dehors du texte proprement dit 
+(allégeant la composition et la lecture de celui-ci), d'éventuellement 
+regrouper toutes les URLs au même endroit dans le fichier, et surtout de
+ pouvoir partager la même URL par plusieurs liens en ne la définissant 
+qu'une fois dans le document !</p>
+<h3 id="images-inlines"><a href="#images-inlines"><span class="header-section-number">2.2.6</span> Images inlines</a></h3>
+<p>Syntaxiquement, un lien Markdown précédé du caractère point d'exclamation <code>!</code>
+ est considéré comme une image. De la même façon que pour les liens, il 
+existe deux syntaxes d'insertion d'images au fil du texte.</p>
+<p><strong>A)</strong> L'insertion d'image par référence <strong>inline</strong> s'effectue selon la syntaxe : <code>![texte alternatif](URL_IMAGE "titre optionnel")</code><br>Notez donc bien le point d'exclamation débutant cette expression. Le <code>titre optionnel</code> est le texte s'affichant lorsque le curseur survole le lien. Quant au <code>texte alternatif</code>, c'est celui qui apparaît lorsque le navigateur ne prend pas en charge l'affichage des images.</p>
+<p><strong>B)</strong> Par ailleurs, et comme pour les liens, on peut également insérer une <strong>image par référence</strong> en deux étapes avec :</p>
+<ol style="list-style-type: decimal">
+<li>d'une part la définition de l'<code>URL_IMAGE</code>, n'importe où dans le document, par : <code>[imgId]: URL_IMAGE "titre optionnel"</code><br> (optionnellement définis sur 2-3 lignes, mais sans intercaler de ligne vide)</li>
+<li>d'autre part l'insertion proprement dite, au fil du texte, de l'image référencée avec : <code>![texte alternatif][imgId]</code></li>
+</ol>
+<div class="g">
+<pre><code>Le logo Markdown ![logo Markdown](markdown1.png "Markdown")
+apparaît parfois également ainsi ![autre variante][imgMD]
+
+[imgMD]: markdown2.png "Markdown"</code></pre>
+</div>
+<div class="do">
+<p>Le logo Markdown <img src="%C3%89laboration%20et%20conversion%20de%20documents%20avec%20Markdown%20et%20Pandoc_files/markdown1.png" title="Markdown" alt="logo Markdown"> apparaît parfois également ainsi <img src="%C3%89laboration%20et%20conversion%20de%20documents%20avec%20Markdown%20et%20Pandoc_files/markdown2.png" title="Markdown" alt="autre variante"></p>
+</div>
+<div class="f">
+
+</div>
+<p>Le grand intérêt de cette seconde technique réside notamment dans la 
+possibilité d'insérer de façon très concise la même image (icône, 
+logo...) à plusieurs endroits dans le document !</p>
+<h3 id="définition-de-liens-ou-dimages-par-référence-implicite"><a href="#d%C3%A9finition-de-liens-ou-dimages-par-r%C3%A9f%C3%A9rence-implicite"><span class="header-section-number">2.2.7</span> Définition de liens ou d'images par référence implicite</a></h3>
+<p>Lorsque l'on insère par référence, dans un paragraphe, un lien ou une
+ image définis ailleurs dans le document, il est possible d'omettre le 
+second champ <code>[urlId]</code> ou <code>[imgId]</code> ! On parle dans ce cas de <strong>référence implicite</strong>, car cela revient à établir un lien vers une référence de nom identique à ce qui est défini dans le premier champ : ainsi <code>[du texte]</code> renverrait vers la référence <code>[du texte]: url</code>. Cette syntaxe apporte une concision extrême dans l'utilisation de liens et d'images !</p>
+<div class="g">
+<pre><code>La [faculté ENAC] forme des ing. et architectes...
+
+La syntaxe ![Markdown] est super légère et concise !
+
+[faculté enac]: &lt;http://enac.epfl.ch&gt; "Environnement naturel..."
+[markdown]: markdown1.png 'Markdown'</code></pre>
+</div>
+<div class="do">
+<p>La <a href="http://enac.epfl.ch/" title="Environnement naturel...">faculté ENAC</a> forme des ing. et architectes...</p>
+<p>La syntaxe <img src="%C3%89laboration%20et%20conversion%20de%20documents%20avec%20Markdown%20et%20Pandoc_files/markdown1.png" title="Markdown" alt="Markdown"> est super légère et concise !</p>
+</div>
+<div class="f">
+
+</div>
+<p>Rappelons encore (ce qui est illustré dans l'exemple ci-dessus) que :</p>
+<ul>
+<li>les labels (<code>urlId</code>, <code>imgId</code>) ne sont pas case-sensitive et peuvent contenir des <em>espaces</em></li>
+<li>dans les définition de références, l'<code>URL</code> peut optionnellement être définie entre <code>&lt; &gt;</code></li>
+<li>le <code>titre optionnel</code> des liens et des images peut être défini entre guillemets, apostrophes ou parenthèses</li>
+</ul>
+<h3 id="listes"><a href="#listes"><span class="header-section-number">2.2.8</span> Listes</a></h3>
+<p>Pour définir une <strong>liste numérotée</strong> (<code>&lt;ol&gt;</code>), il suffit de saisir, au début de chaque élément de la liste, un nombre quelconque suivi d'un point et de 1 ou plusieurs <em>espaces</em> ou <em>tab</em>. Si un paragraphe doit commencer par un nombre, il faut préfixer le point du nombre par <code>\</code> afin qu'il ne soit pas considéré comme un début de liste numérotée.</p>
+<p>Pour définir une <strong>liste à puce</strong> (<code>&lt;ul&gt;</code>), il suffit de débuter chaque item par l'un des caractères <code>*</code>, <code>+</code> ou <code>-</code> suivi d'1 ou plusieurs <em>espaces</em> ou <em>tab</em>.</p>
+<p>Le début et la fin de la liste doivent être respectivement précédé et suivi d'1 ligne vide au moins.</p>
+<p>Il est possible de faire des listes <strong>imbriquées</strong> : pour cela la sous-liste devra être indentée à droite d'1 <em>tab</em> ou de 4 <em>espaces</em> par rapport à l'élément supérieur. Les sous-listes n'ont pas besoin d'être précédées et suivies d'une ligne vide.</p>
+<div class="g">
+<pre><code>1. raisin
+0. pomme
+ ⟼ * golden
+ ⟼ - granny smith
+ ⟼ + boskoop
+0. abricot
+
+1291\. Signature du pacte fédéral Suisse</code></pre>
+</div>
+<div class="do">
+<ol style="list-style-type: decimal">
+<li>raisin</li>
+<li>pomme
+<ul>
+<li>golden</li>
+<li>granny smith</li>
+<li>boskoop</li>
+</ul></li>
+<li>abricot</li>
+</ol>
+<p>1291. Signature du pacte fédéral Suisse</p>
+</div>
+<div class="f">
+
+</div>
+<p>Si l'on désire un espacement de paragraphe entre les éléments de la 
+liste, on définira ceux-ci comme des paragraphes c'est-à-dire en 
+intercalant des lignes vides.</p>
+<div class="g">
+<pre><code>* les éléments
+* sont ici
+* serrés
+
+1. mais ici espacés
+↲
+0. comme plusieurs
+↲
+0. paragraphes consécutifs</code></pre>
+</div>
+<div class="do">
+<ul>
+<li>les éléments</li>
+<li>sont ici</li>
+<li>serrés</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><p>mais ici espacés</p></li>
+<li><p>comme plusieurs</p></li>
+<li><p>paragraphes consécutifs</p></li>
+</ol>
+</div>
+<div class="f">
+
+</div>
+<h3 id="inclusion-de-code-html-dans-un-fichier-markdown"><a href="#inclusion-de-code-html-dans-un-fichier-markdown"><span class="header-section-number">2.2.9</span> Inclusion de code HTML dans un fichier Markdown</a></h3>
+<p>La plupart des balises HTML (y compris <code>&lt;span&gt;</code>) peuvent être utilisées dans des paragraphes Markdown.</p>
+<p>Les structures HTML de type bloc (<code>&lt;div&gt;, &lt;table&gt;, &lt;pre&gt;</code>...)
+ doivent cependant être précédées et suivies d'1 ligne vide au moins, et
+ les balises de début et fin du bloc ne doivent pas être indentées (donc
+ non précédées d'<em>espaces</em> ou <em>tab</em>). Mais attention : 
+sachez qu'avec la syntaxe stricte Markdown (cette restriction ne 
+s'applique pas à Pandoc) le formatage Markdown n'est pas appliqué à 
+l'intérieur de tels blocs HTML !</p>
+<div class="g">
+<pre><code>Utilisation de balises HTML : &lt;u&gt;souligné&lt;/u&gt;,
+  &lt;span style="color: #f00;"&gt;couleur&lt;/span&gt; ...
+
+&lt;table border="1" cellspacing="0" cellpadding="4" align="center"&gt;
+   &lt;tr&gt; &lt;td&gt;Tableau&lt;/td&gt; &lt;td&gt;par balises HTML&lt;/td&gt; &lt;/tr&gt; 
+&lt;/table&gt;
+
+Paragraphe _normal_...</code></pre>
+</div>
+<div class="do">
+<p>Utilisation de balises HTML : <u>souligné</u>, <span style="color: #f00;">couleur</span> ...</p>
+<table border="1" cellpadding="4" cellspacing="0" align="center">
+   <tbody><tr> <td>
+Tableau
+</td> <td>
+par balises HTML
+</td> </tr> 
+</tbody></table>
+
+<p>Paragraphe <em>normal</em>...</p>
+</div>
+<div class="f">
+
+</div>
+<h3 id="échappement-de-certains-caractères"><a href="#%C3%A9chappement-de-certains-caract%C3%A8res"><span class="header-section-number">2.2.10</span> Échappement de certains caractères</a></h3>
+<p>A l'extérieur des structures de type code inline ou bloc de code, si 
+l'on veut afficher les caractères ci-dessous (qui ont sinon une 
+signification Markdown ou Pandoc) il peut être nécessaire de les 
+"échapper" en les préfixant par le caractère backslash <code>\</code></p>
+<div class="g">
+<pre><code>    \       backslash
+    `       accent grave
+    *       étoile/astérisque
+    ⎯       souligné
+    +       plus
+    -       tiret/moins
+    (  )    parenthèses
+    [  ]    parenthèses carrées
+    {  }    accolades
+    &lt;  &gt;    crochets pointus (de balises)
+    #       dièse
+    @       arobase
+    ~       tilde
+    .       point
+    !       point d'exclamation</code></pre>
+</div>
+<div class="f">
+
+</div>
+<h2 id="installation-et-utilisation-du-convertisseur-markdown-original"><a href="#installation-et-utilisation-du-convertisseur-markdown-original"><span class="header-section-number">2.3</span> Installation et utilisation du convertisseur Markdown original</a></h2>
+<p>Nous vous recommandons plutôt d'utiliser le <a href="#commande_pandoc">convertisseur Pandoc</a>
+ qui offre bien plus de possibilités. Si vous tenez cependant à tester 
+le convertisseur Markdown original, sachez qu'il s'agit d'un simple 
+script Perl sous license BSD téléchargeable via un lien au haut de la <a href="http://daringfireball.net/projects/markdown/">home-page</a> du site Markdown. Il est donc nécessaire de disposer d'un interpréteur <a href="http://www.perl.com/">Perl</a> sur votre machine (ce qui est par défaut le cas sous Linux et Mac OS X, mais pas sous Windows où vous pouvez utiliser le <a href="http://strawberryperl.com/">Strawberry Perl</a> ou l'<a href="http://www.activestate.com/activeperl">ActivePerl</a>). La conversion d'un fichier Markdown en HTML s'effectue alors avec la commande : <code>perl Markdown.pl fichier.md &gt; fichier.html</code></p>
+<h1 id="le-convertisseur-pandoc"><a href="#le-convertisseur-pandoc"><span class="header-section-number">3</span> Le convertisseur Pandoc</a></h1>
+<h2 id="généralités-1"><a href="#g%C3%A9n%C3%A9ralit%C3%A9s-1"><span class="header-section-number">3.1</span> Généralités</a></h2>
+<p><em>«Whereas markdown was originally designed with HTML generation in
+ mind, pandoc is designed for multiple output formats. Thus, while 
+pandoc allows the embedding of raw HTML, it discourages it, and provides
+ other, non-HTMLish ways of representing important document elements 
+like definition lists, tables, mathematics, and footnotes.»</em> (<a href="http://johnmacfarlane.net/pandoc/README.html#philosophy">John MacFarlane</a>)</p>
+<p>Markdown est donc une syntaxe, inspirée du courrier électronique en 
+mode texte et des wikis, conçue dans l'esprit d'une grande facilité 
+d'écriture et de lecture, mais essentiellement orientée vers la 
+génération de pages HTML simples. Son auteur n'ayant jamais souhaité 
+enrichir cette syntaxe (p.ex. implémentation de tableaux, listes de 
+définitions, notes de bas de page...), cela a favorisé l'émergence de 
+nombreuses extensions implémentées par différents convertisseurs 
+alternatifs, le plus abouti et polyvalent étant aujourd'hui Pandoc.</p>
+<p>Développé par <strong><a href="http://johnmacfarlane.net/">John MacFarlane</a></strong> (Prof. de philosophie (!) à l'Université de Berkeley) dans ses temps de "<em>procrastination structurée</em>", <strong>Pandoc</strong>
+ est un outil distribué sous license GPL v2 de conversion de documents 
+très polyvalent et supportant de nombreux formats (une véritable <em>pierre de rosette</em> du traitement de documents, voir cette <a href="http://johnmacfarlane.net/pandoc/diagram.png">figure</a>) :</p>
+<ul>
+<li>en lecture : Markdown (original ou Pandoc-extended), Textile, reStructuredText, HTML, LaTeX, MediaWiki, DocBook XML, OPML...</li>
+<li>en écriture : Markdown (original ou Pandoc-extended), 
+reStructuredText, XHTML, HTML5, LaTeX, ConTeXt, RTF, DocBook XML, 
+OpenDocument XML, ODT, docx, GNU Texinfo, MediaWiki, ePub (v2 or v3), 
+FictionBook2, Textile, groff man pages, Emacs Org-Mode, AsciiDoc, PDF, 
+OPML ; ainsi que des slide shows HTML (de type S5, Slidy, Slideous, 
+DZSlides, Revealjs) ou PDF (LaTeX beamer)...</li>
+</ul>
+<p>Le grand intérêt de Pandoc, en ce qui nous concerne ici, est que non 
+seulement il gère le format Markdown mais qu'il en étend largement et 
+intelligemment la syntaxe (sans l'alourdir), rendant possible 
+l'utilisation de ce format léger pour élaborer et manipuler des 
+documents riches, comme on va le voir dans le chapitre qui suit.</p>
+<h2 id="extensions-à-la-syntaxe-markdown-implémentées-par-pandoc"><a href="#extensions-%C3%A0-la-syntaxe-markdown-impl%C3%A9ment%C3%A9es-par-pandoc"><span class="header-section-number">3.2</span> Extensions à la syntaxe Markdown implémentées par Pandoc</a></h2>
+<p>Tout ce qui a été dit précédemment concernant la syntaxe de base 
+Markdown est valable pour le convertisseur Pandoc. On décrit ci-après 
+les principales extensions apportées à la syntaxe Markdown par Pandoc. 
+Pour une présentation exhaustive de celles-ci, passez la commande <code>man pandoc_markdown</code> sous Linux ou Mac OS X, ou voyez le "Pandoc User's Guide" sous Windows.</p>
+<h3 id="encodage_utf8"><a href="#encodage_utf8"><span class="header-section-number">3.2.1</span> Encodage de fichiers</a></h3>
+<p><strong>Important</strong> : Pandoc utilise exclusivement l'encodage de caractères <strong>UTF-8</strong>
+ en entrée et sortie. Si vous obtenez des erreurs lors d'une conversion,
+ le plus vraisemblable est que votre fichier Markdown d'entrée est 
+encodé en ISO-8859-* (ISO-Latin). Commencez donc par le re-sauvegarder 
+en UTF-8.</p>
+<h3 id="sauts-de-ligne"><a href="#sauts-de-ligne"><span class="header-section-number">3.2.2</span> Sauts de ligne</a></h3>
+<p>Pour faire un <strong>saut de ligne</strong> (<code>&lt;br /&gt;</code> en HTML) au sein d'un paragraphe, on peut utiliser le backslash <code>\</code> immédiatement suivi du saut à la ligne, ce qui est bien plus lisible, dans un éditeur, que les 2 <em>espaces</em> de la syntaxe Markdown. En fait cela revient à "échapper" le caractère <em>newline</em>.</p>
+<div class="g">
+<pre><code>La Cigale, ayant chanté tout l'été, \
+Se trouva fort dépourvue \
+Quand la bise fut venue.
+
+_Jean de la Fontaine_</code></pre>
+</div>
+<div class="do">
+<p>La Cigale, ayant chanté tout l'été,<br>Se trouva fort dépourvue<br>Quand la bise fut venue.</p>
+<p><em>Jean de la Fontaine</em></p>
+</div>
+<div class="f">
+
+</div>
+<p>Voyez aussi la technique du <a href="#styles_blocs">bloc de lignes</a>.</p>
+<h3 id="titres-1"><a href="#titres-1"><span class="header-section-number">3.2.3</span> Titres</a></h3>
+<p>En premier lieu Pandoc permet, au moyen des options <code>-N</code> et <code>--toc</code> présentées <a href="#num_titres_tdm">plus bas</a>, de <strong>numéroter</strong> automatiquement les titres du document ainsi que collecter ceux-ci pour établir une <strong>table des matières</strong> avec liens hypertextes vers les chapitres.</p>
+<p>Il est possible d'associer aux titres des <strong>attributs</strong> de type <em>classes</em> ou <em>identifiants</em> ainsi que des paires <em>clé=valeur</em>. On définit ces propriétés entre <code>{ }</code> directement à la suite du titre (sur la même ligne) ainsi : <code>## Texte du titre { #myId .myClass attribut="valeur" }</code></p>
+<p>S'agissant d'une conversion en HTML, l'identifiant <code>#myId</code> ajoute un <code>id="myId"</code> à la balise <code>&lt;h*&gt;</code> du titre, ce qui donne la possibilité de définir ailleurs dans le document un <strong>lien</strong> vers ce titre avec <code>[lien]#myId</code> (générant <code>&lt;a href="#myId"&gt;lien&lt;/a&gt;</code>).</p>
+<p>Si l'on fait numéroter les titres avec l'option <code>pandoc -N</code>, on peut ajouter l'attribut tiret <code>-</code> ou la classe <code>.unnumbered</code> aux titres que l'on ne souhaite pas faire numéroter.</p>
+<div class="g">
+<pre><code>### Titre avec Id et non numéroté {.unnumbered #premTitre}
+
+### Titre _stylé_ non numéroté {style="background: #eee;" -}
+
+Lien vers le [premier](#premTitre) de ces 2 titres</code></pre>
+</div>
+<div class="do">
+<!-- je triche ici en fabriquant le résultat afin que ces titres n'apparaissent pas dans la TOC -->
+<h3 id="premTitre" style="margin-top: 4px;">
+Titre avec Id et non numéroté
+</h3>
+<h3 style="background: #eee; margin-top: 4px;">
+Titre <i>stylé</i> non numéroté
+</h3>
+
+<p>Lien vers le <a href="#premTitre">premier</a> de ces 2 titres</p>
+</div>
+<div class="f">
+
+</div>
+<p>Notez finalement que Pandoc exige que chaque titre soit précédé d'une
+ ligne vide, ce qui n'est pas obligatoire dans la syntaxe de base 
+Markdown.</p>
+<h3 id="styles_blocs"><a href="#styles_blocs"><span class="header-section-number">3.2.4</span> Styles et blocs</a></h3>
+<p>Pandoc implémente les styles supplémentaires suivants :</p>
+<ul>
+<li>on peut définir du texte barré (<code>&lt;del&gt;</code>) en le bordant à gauche et à droite par 2 caractères <code>~~</code></li>
+<li>les exposants peuvent être écrits en les entourant de <code>^ ^</code> (les éventuels espaces devant être préfixés par <code>\</code>)</li>
+<li>les indices peuvent être écrits en les entourant de <code>~ ~</code> (les éventuels espaces devant être préfixés par <code>\</code>)</li>
+</ul>
+<div class="g">
+<pre><code>Une ~~portion de texte~~ barrée ! \
+2^10^ vaut 1024 \
+La molécule de l'eau est H~2~O</code></pre>
+</div>
+<div class="do">
+<p>Une <del>portion de texte</del> barrée !<br>2<sup>10</sup> vaut 1024<br>La molécule de l'eau est H<sub>2</sub>O</p>
+</div>
+<div class="f">
+
+</div>
+<p>Comme pour les titres (ci-dessus) et les blocs de code (ci-dessous), on peut associer des attributs aux codes inlines :</p>
+<div class="g">
+<pre><code>Du `code inline`{style="color: #b00;"} reformaté, ou \
+syntaxiquement coloré `print("Hello world !")`{.python}</code></pre>
+</div>
+<div class="do">
+<p>Du <code style="color: #b00;">code inline</code> reformaté, ou<br>syntaxiquement coloré <code class="sourceCode python"><span class="dt">print</span>(<span class="st">"Hello world !"</span>)</code></p>
+</div>
+<div class="f">
+
+</div>
+<p>Pour définir un <strong>bloc de code</strong>, au lieu de l'indenter 
+comme l'exige la syntaxe de base Markdown, Pandoc offre aussi la 
+possibilité de le délimiter en-dessus et en-dessous par une ligne 
+composée de 3 ou davantage caractères tildes <code>~</code> ou accents graves <code>`</code>, le tout devant être précédé et suivi d'une ligne vide.</p>
+<p>Comme pour les titres et le code inline, Pandoc permet d'attacher des attributs au bloc (<em>classes</em> et <em>identifiants</em> CSS), définis entre <code>{ }</code> à la fin de la première ligne de tildes.</p>
+<p>Des classes CSS prédéfinies permettent d'activer la <strong>coloration syntaxique</strong> (<em>syntax highlighting</em>) de rendu du code et même activer la numérotation des lignes du code. Voyez les <code>langages</code> supportés en frappant <code>pandoc --version</code>. Au lieu de <code>~~~~~~~ { .langage }</code> on peut aussi utiliser la forme simplifiée <code>~~~~~~~ langage</code> (sans accolades et point).</p>
+<div class="g">
+<pre><code>~~~~~~~ { .python .numberLines startFrom="10" }
+#!/usr/bin/env python3
+from time import localtime
+heure = localtime().tm_hour
+if heure &lt; 17:
+    print("Bonjour !")
+else:
+    print("Bonsoir !")
+~~~~~~~</code></pre>
+</div>
+<div class="d">
+<table class="sourceCode python numberLines" startfrom="10"><tbody><tr class="sourceCode"><td class="lineNumbers"><pre>10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="sourceCode"><pre><code class="sourceCode python"><span class="co">#!/usr/bin/env python3</span>
+<span class="ch">from</span> time <span class="ch">import</span> localtime
+heure = localtime().tm_hour
+<span class="kw">if</span> heure &lt; <span class="dv">17</span>:
+    <span class="dt">print</span>(<span class="st">"Bonjour !"</span>)
+<span class="kw">else</span>:
+    <span class="dt">print</span>(<span class="st">"Bonsoir !"</span>)</code></pre></td></tr></tbody></table>
+</div>
+<div class="f">
+
+</div>
+<p>Un <strong>bloc de lignes</strong> est en quelque sorte une variante du <em>bloc de code</em>. Il consiste en une suite de lignes commençant par le caractère barre verticale <code>|</code>.
+ Le découpage en lignes ainsi que l'indentation y sont aussi respectés, 
+mais en plus le formatage Markdown s'applique et les balises HTML sont 
+interprétées.</p>
+<div class="g">
+<pre><code>| Séquence de lignes dans lesquelles l'indentation est
+|    respectée, le **formatage** Markdown appliqué, y.c.
+|       définition de `code`, usage &lt;u&gt;balises&lt;/u&gt; HTML</code></pre>
+</div>
+<div class="do">
+<p>Séquence de lignes dans lesquelles l'indentation est<br>&nbsp;&nbsp;&nbsp;respectée, le <strong>formatage</strong> Markdown appliqué, y.c.<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;définition de <code>code</code>, usage <u>balises</u> HTML</p>
+</div>
+<div class="f">
+
+</div>
+<h3 id="tex_math"><a href="#tex_math"><span class="header-section-number">3.2.5</span> Formules TeX Math</a></h3>
+<p>L'affichage HTML de formules est possible en les définissant sous forme d'expressions TeX Math (voir par exemple ce <a href="http://en.wikibooks.org/wiki/LaTeX/Mathematics">tutoriel</a>) simplement entourées de caractères dollars <code>$ $</code>. Il ne doit pas y avoir d'espace directement après le premier <code>$</code> ni directement avant le second <code>$</code>.</p>
+<p>Il faudra générer le code HTML en utilisant l'une des <a href="#options_tex_math">options de conversion</a> Tex Math de la commande Pandoc.</p>
+<div class="g">
+<pre><code>$a \cdot x^2 + b \cdot x + c = 0 \quad \Longrightarrow \quad
+x = \frac {-b \pm \sqrt{b^2 - 4ac}}{2a}$</code></pre>
+</div>
+<div class="do">
+<p><span class="math"><span style="color: inherit;" class="MathJax_Preview"></span><span role="presentation" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;mo&gt;&amp;#x22C5;&lt;/mo&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;mspace width=&quot;1em&quot; /&gt;&lt;mo stretchy=&quot;false&quot;&gt;&amp;#x27F9;&lt;/mo&gt;&lt;mspace width=&quot;1em&quot; /&gt;&lt;mi&gt;x&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;mo&gt;&amp;#x00B1;&lt;/mo&gt;&lt;msqrt&gt;&lt;msup&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;4&lt;/mn&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;/msqrt&gt;&lt;/mrow&gt;&lt;mrow&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;/math&gt;" style="position: relative;" tabindex="0" id="MathJax-Element-1-Frame" class="MathJax"><nobr aria-hidden="true"><span style="width: 24.481em; display: inline-block;" role="math" id="MathJax-Span-1" class="math"><span style="display: inline-block; position: relative; width: 19.569em; height: 0px; font-size: 125%;"><span style="position: absolute; clip: rect(1.188em, 1019.57em, 3.234em, -1000em); top: -2.646em; left: 0em;"><span id="MathJax-Span-2" class="mrow"><span style="font-family: MathJax_Math; font-style: italic;" id="MathJax-Span-3" class="mi">a</span><span style="font-family: MathJax_Main; padding-left: 0.222em;" id="MathJax-Span-4" class="mo">⋅</span><span style="padding-left: 0.222em;" id="MathJax-Span-5" class="msubsup"><span style="display: inline-block; position: relative; width: 1.001em; height: 0px;"><span style="position: absolute; clip: rect(3.373em, 1000.52em, 4.196em, -1000em); top: -4em; left: 0em;"><span style="font-family: MathJax_Math; font-style: italic;" id="MathJax-Span-6" class="mi">x</span><span style="display: inline-block; width: 0px; height: 4em;"></span></span><span style="position: absolute; top: -4.363em; left: 0.572em;"><span style="font-size: 70.7%; font-family: MathJax_Main;" id="MathJax-Span-7" class="mn">2</span><span style="display: inline-block; width: 0px; height: 4em;"></span></span></span></span><span style="font-family: MathJax_Main; padding-left: 0.222em;" id="MathJax-Span-8" class="mo">+</span><span style="font-family: MathJax_Math; font-style: italic; padding-left: 0.222em;" id="MathJax-Span-9" class="mi">b</span><span style="font-family: MathJax_Main; padding-left: 0.222em;" id="MathJax-Span-10" class="mo">⋅</span><span style="font-family: MathJax_Math; font-style: italic; padding-left: 0.222em;" id="MathJax-Span-11" class="mi">x</span><span style="font-family: MathJax_Main; padding-left: 0.222em;" id="MathJax-Span-12" class="mo">+</span><span style="font-family: MathJax_Math; font-style: italic; padding-left: 0.222em;" id="MathJax-Span-13" class="mi">c</span><span style="font-family: MathJax_Main; padding-left: 0.278em;" id="MathJax-Span-14" class="mo">=</span><span style="font-family: MathJax_Main; padding-left: 0.278em;" id="MathJax-Span-15" class="mn">0</span><span style="height: 0em; vertical-align: 0em; width: 1em; display: inline-block; overflow: hidden;" id="MathJax-Span-16" class="mspace"></span><span style="font-family: MathJax_Main; padding-left: 0.278em;" id="MathJax-Span-17" class="mo">⟹</span><span style="height: 0em; vertical-align: 0em; width: 1em; display: inline-block; overflow: hidden;" id="MathJax-Span-18" class="mspace"></span><span style="font-family: MathJax_Math; font-style: italic; padding-left: 0.278em;" id="MathJax-Span-19" class="mi">x</span><span style="font-family: MathJax_Main; padding-left: 0.278em;" id="MathJax-Span-20" class="mo">=</span><span style="padding-left: 0.278em;" id="MathJax-Span-21" class="mfrac"><span style="display: inline-block; position: relative; width: 4.421em; height: 0px; margin-right: 0.12em; margin-left: 0.12em;"><span style="position: absolute; clip: rect(3.095em, 1004.3em, 4.313em, -1000em); top: -4.553em; left: 50%; margin-left: -2.151em;"><span id="MathJax-Span-22" class="mrow"><span style="font-size: 70.7%; font-family: MathJax_Main;" id="MathJax-Span-23" class="mo">−</span><span style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;" id="MathJax-Span-24" class="mi">b</span><span style="font-size: 70.7%; font-family: MathJax_Main;" id="MathJax-Span-25" class="mo">±</span><span id="MathJax-Span-26" class="msqrt"><span style="display: inline-block; position: relative; width: 2.897em; height: 0px;"><span style="position: absolute; clip: rect(3.185em, 1002.19em, 4.192em, -1000em); top: -4em; left: 0.707em;"><span id="MathJax-Span-27" class="mrow"><span id="MathJax-Span-28" class="msubsup"><span style="display: inline-block; position: relative; width: 0.606em; height: 0px;"><span style="position: absolute; clip: rect(3.325em, 1000.3em, 4.192em, -1000em); top: -4em; left: 0em;"><span style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;" id="MathJax-Span-29" class="mi">b</span><span style="display: inline-block; width: 0px; height: 4em;"></span></span><span style="position: absolute; top: -4.298em; left: 0.303em;"><span style="font-size: 50%; font-family: MathJax_Main;" id="MathJax-Span-30" class="mn">2</span><span style="display: inline-block; width: 0px; height: 4em;"></span></span></span></span><span style="font-size: 70.7%; font-family: MathJax_Main;" id="MathJax-Span-31" class="mo">−</span><span style="font-size: 70.7%; font-family: MathJax_Main;" id="MathJax-Span-32" class="mn">4</span><span style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;" id="MathJax-Span-33" class="mi">a</span><span style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;" id="MathJax-Span-34" class="mi">c</span></span><span style="display: inline-block; width: 0px; height: 4em;"></span></span><span style="position: absolute; clip: rect(0.923em, 1002.19em, 1.369em, -1000em); top: -1.828em; left: 0.707em;"><span style="display: inline-block; overflow: hidden; vertical-align: -0.077em; border-top: 1.2px solid; width: 2.19em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.108em;"></span></span><span style="position: absolute; clip: rect(3.214em, 1000.72em, 4.432em, -1000em); top: -4.119em; left: 0em;"><span><span style="font-size: 70.7%; font-family: MathJax_Size1;">√</span></span><span style="display: inline-block; width: 0px; height: 4em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 4em;"></span></span><span style="position: absolute; clip: rect(3.344em, 1000.71em, 4.192em, -1000em); top: -3.604em; left: 50%; margin-left: -0.364em;"><span id="MathJax-Span-35" class="mrow"><span style="font-size: 70.7%; font-family: MathJax_Main;" id="MathJax-Span-36" class="mn">2</span><span style="font-size: 70.7%; font-family: MathJax_Math; font-style: italic;" id="MathJax-Span-37" class="mi">a</span></span><span style="display: inline-block; width: 0px; height: 4em;"></span></span><span style="position: absolute; clip: rect(0.846em, 1004.42em, 1.292em, -1000em); top: -1.328em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.3px solid; width: 4.421em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.108em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.646em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.581em; border-left: 0px solid; width: 0px; height: 2.25em;"></span></span></nobr><span role="presentation" class="MJX_Assistive_MathML"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>⋅</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mo>⋅</mo><mi>x</mi><mo>+</mo><mi>c</mi><mo>=</mo><mn>0</mn><mspace width="1em"></mspace><mo stretchy="false">⟹</mo><mspace width="1em"></mspace><mi>x</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mi>b</mi><mo>±</mo><msqrt><msup><mi>b</mi><mn>2</mn></msup><mo>−</mo><mn>4</mn><mi>a</mi><mi>c</mi></msqrt></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></math></span></span><script id="MathJax-Element-1" type="math/tex">a \cdot x^2 + b \cdot x + c = 0 \quad \Longrightarrow \quad x = \frac {-b \pm \sqrt{b^2 - 4ac}}{2a}</script></span></p>
+</div>
+<div class="f">
+
+</div>
+<!-- un exemple plus complexe qui ne passe bien qu'en MathJax :
+  $J_\alpha(x) = \sum\limits_{m=0}^\infty \frac{(-1)^m}{m! \, \Gamma(m + \alpha + 1)}{\left({\frac{x}{2}}\right)}^{2 m + \alpha}$ 
+-->
+
+
+
+
+<h3 id="figures"><a href="#figures"><span class="header-section-number">3.2.6</span> Figures</a></h3>
+<p>Une image définie en tant que paragraphe indépendant (c'est-à-dire 
+non pas insérée "au fil du texte" dans un paragraphe) est traitée par 
+Pandoc comme une figure, et le <code>texte alternatif</code> est automatiquement utilisé pour constituer la légende sous la figure.</p>
+<p>La syntaxe <code>![texte alternatif](URL_IMAGE "titre optionnel")</code> génère donc dans ce cas en HTML la structure suivante :</p>
+<pre class="sourceCode html"><code class="sourceCode html">  <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">"figure"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">"URL_IMAGE"</span><span class="ot"> title=</span><span class="st">"titre optionnel"</span><span class="ot"> alt=</span><span class="st">"texte alternatif"</span> <span class="kw">/&gt;</span>
+    <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">"caption"</span><span class="kw">&gt;</span>texte alternatif<span class="kw">&lt;/p&gt;</span>
+  <span class="kw">&lt;/div&gt;</span></code></pre>
+<div class="g">
+<p>Exemple :</p>
+<pre><code>↲
+![Légende de la figure...](markdown-large.png "Title...")
+↲</code></pre>
+</div>
+<div class="d">
+<div class="figure">
+<img src="%C3%89laboration%20et%20conversion%20de%20documents%20avec%20Markdown%20et%20Pandoc_files/markdown-large.png" title="Title..." alt="Légende de la figure..."><p class="caption">Légende de la figure...</p>
+</div>
+</div>
+<div class="f">
+
+</div>
+<h3 id="listes-1"><a href="#listes-1"><span class="header-section-number">3.2.7</span> Listes</a></h3>
+<p>Les extensions apportées par Pandoc à la syntaxe Markdown dans le 
+domaine des listes sont nombreuses et particulièrement bienvenues.</p>
+<h4 id="listes-numérotées"><a href="#listes-num%C3%A9rot%C3%A9es"><span class="header-section-number">3.2.7.1</span> Listes numérotées</a></h4>
+<p>Pandoc apporte aux listes numérotées les améliorations suivantes :</p>
+<ul>
+<li>la numérotation n'est pas limitée aux chiffres arabes, mais peut 
+être de type alphabétique ou chiffres romains, minuscules ou majuscules</li>
+<li>le numéro spécifié pour le premier élément de la liste est 
+significatif, indiquant que la numérotation doit débuter à cette valeur 
+et non pas à 1</li>
+<li>on peut faire usage de parenthèses <code>()</code> en lieu et place du point pour indiquer qu'il s'agit d'une liste numérotée</li>
+<li>le caractère dièse <code>#</code> peut être utilisé comme substitut au numéro à partir du second élément de la liste</li>
+</ul>
+<div class="g">
+<pre><code>11. Liste dont la numérotation démarre au numéro spécifié
+#.  Élément suivant, etc...
+
+
+(A) Liste numérotée par des lettres majuscules
+    f) sous-liste
+    #) numérotée par des lettres minuscules
+(D) Élément suivant (la lettre D est ici sans effet car
+    ce n'est pas le 1er élément de la liste !)
+(#) Etc...
+
+
+I) Liste numérotée par des chiffres romains majuscules
+    i. sous-liste
+    #. numérotée par des chiffres romains minuscules
+#) Élément suivant</code></pre>
+</div>
+<div class="do">
+<ol start="11" style="list-style-type: decimal">
+<li>Liste dont la numérotation démarre au numéro spécifié</li>
+<li>Élément suivant, etc...</li>
+</ol>
+<ol style="list-style-type: upper-alpha">
+<li>Liste numérotée par des lettres majuscules
+<ol start="6" style="list-style-type: lower-alpha">
+<li>sous-liste</li>
+<li>numérotée par des lettres minuscules</li>
+</ol></li>
+<li>Élément suivant (la lettre D est ici sans effet car ce n'est pas le 1er élément de la liste !)</li>
+<li>Etc...</li>
+</ol>
+<ol style="list-style-type: upper-roman">
+<li>Liste numérotée par des chiffres romains majuscules
+<ol style="list-style-type: lower-roman">
+<li>sous-liste</li>
+<li>numérotée par des chiffres romains minuscules</li>
+</ol></li>
+<li>Élément suivant</li>
+</ol>
+</div>
+<div class="f">
+
+</div>
+<p>Si un paragraphe doit réellement commencer par une lettre suivie 
+d'une parenthèse fermée, pour que cela ne soit pas interprété comme le 
+début d'une liste numérotée on peut préfixer la parenthèse par un 
+backslash, par exemple : <code>A\)</code></p>
+<h4 id="listes_ref"><a href="#listes_ref"><span class="header-section-number">3.2.7.2</span> Liste numérotée référençable (une seule par document)</a></h4>
+<p>Le caractère <code>@</code> peut être utilisé pour créer une liste numérotée de façon continue à travers tout le document (appelée par Pandoc <em>numbered example list</em>).
+ Ce caractère peut être suivi d'un label afin de pouvoir se référer, 
+ailleurs dans le document, à l'élément considéré de la liste.</p>
+<p>Ce type de liste peut être vu comme une alternative aux <a href="#notes_bas_page">notes de bas de page</a>.</p>
+<div class="g">
+<pre><code>L'EPFL [voir @epfl] se situe... La faculté ENAC
+[voir @enac] forme des ingénieurs et architectes...
+
+(@epfl) École polytechnique fédérale de Lausanne
+(@enac) Faculté Environnement naturel, Architectural
+et Construit
+
+Suite du document...
+
+@. Continuation de la liste
+@. Etc...</code></pre>
+</div>
+<div class="do">
+<p>L'EPFL <span class="citation">[voir @epfl]</span> se situe... La faculté ENAC <span class="citation">[voir @enac]</span> forme des ingénieurs et architectes...</p>
+<ol style="list-style-type: example">
+<li>École polytechnique fédérale de Lausanne</li>
+<li>Faculté Environnement naturel, Architectural et Construit</li>
+</ol>
+<p>Suite du document...</p>
+<ol start="3" style="list-style-type: example">
+<li>Continuation de la liste</li>
+<li>Etc...</li>
+</ol>
+</div>
+<div class="f">
+
+</div>
+<h4 id="listes-de-définitions"><a href="#listes-de-d%C3%A9finitions"><span class="header-section-number">3.2.7.3</span> Listes de définitions</a></h4>
+<p>Les listes de définitions correspondent à la structure HTML suivante, un peu désuète bien que fort pratique :</p>
+<div class="g">
+<pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;dl&gt;</span>
+   <span class="kw">&lt;dt&gt;</span>terme<span class="kw">&lt;/dt&gt;</span>
+   <span class="kw">&lt;dd&gt;</span>définition 1<span class="kw">&lt;/dd&gt;</span>
+   <span class="kw">&lt;dd&gt;</span>définition 2<span class="kw">&lt;/dd&gt;</span>
+<span class="kw">&lt;/dl&gt;</span></code></pre>
+</div>
+<div class="do">
+
+<dl>
+   <dt>
+terme
+</dt>
+   <dd>
+définition 1
+</dd>
+   <dd>
+définition 2
+</dd>
+</dl>
+
+</div>
+<div class="f"></div>
+
+
+<p>Dans la syntaxe Pandoc, le <code>terme</code> doit tenir sur une seule ligne et peut être optionnellement suivi d'une ligne vide. Il doit être suivi d'une ou plusieurs <code>définition(s)</code>, chacune débutant par le caractère double point <code>:</code> ou tilde <code>~</code>. Ce caractère sera facultativement précédé d'1 ou 2 <em>espaces</em> mais obligatoirement suivi d'1 à 4 <em>espaces</em> ou de 1 <em>tab</em>.</p>
+<div class="g">
+<pre><code>[EPFL](http://www.epfl.ch)
+:⟼École polytechnique fédérale de Lausanne
+
+ ⟼Située à l'ouest de Lausanne...
+
+**ENAC**
+  ~ Faculté Environnement Naturel, Architectural et Construit
+  ~ Elle comporte 4 instituts...
+    Elle offre 3 plans d'études...</code></pre>
+</div>
+<div class="do">
+<dl>
+<dt><a href="http://www.epfl.ch/">EPFL</a></dt>
+<dd><p>École polytechnique fédérale de Lausanne</p>
+<p>Située à l'ouest de Lausanne...</p>
+</dd>
+<dt><strong>ENAC</strong></dt>
+<dd>Faculté Environnement Naturel, Architectural et Construit
+</dd>
+<dd><p>Elle comporte 4 instituts... Elle offre 3 plans d'études...</p>
+</dd>
+</dl>
+</div>
+<div class="f">
+
+</div>
+<h4 id="autres-remarques-sur-les-listes"><a href="#autres-remarques-sur-les-listes"><span class="header-section-number">3.2.7.4</span> Autres remarques sur les listes</a></h4>
+<p>Avec Pandoc (et contrairement à l'implémentation originale Markdown),
+ ce qui suit le dernier élément d'une liste peut être considéré comme 
+subordonné au dernier élément de la liste. Si cela ne correspond pas à 
+ce que l'on souhaite, la solution consiste à intercaler un commentaire 
+HTML <code>&lt;!--  --&gt;</code> (un peu une bizarrerie, mais suggérée par MacFarlane).</p>
+<div class="g">
+<pre><code>1. éléments...
+#. de liste...
+
+    subordonné au 2e élément de la liste !
+
+#. continuation de la liste !
+
+Et ci-dessous modification de ce comportement :
+
+1. éléments...
+#. de liste...
+
+&lt;!--  --&gt;
+
+    bloc de code indépendant !
+
+#. nouvelle liste !</code></pre>
+</div>
+<div class="do">
+<ol style="list-style-type: decimal">
+<li>éléments...</li>
+<li><p>de liste...</p>
+<p>subordonné au 2e élément de la liste !</p></li>
+<li><p>continuation de la liste !</p></li>
+</ol>
+<p>Et ci-dessous modification de ce comportement :</p>
+<ol style="list-style-type: decimal">
+<li>éléments...</li>
+<li>de liste...</li>
+</ol>
+<!--  -->
+
+<pre><code>bloc de code indépendant !</code></pre>
+<ol>
+<li>nouvelle liste !</li>
+</ol>
+</div>
+<div class="f">
+
+</div>
+<h3 id="notes_bas_page"><a href="#notes_bas_page"><span class="header-section-number">3.2.8</span> Notes de bas de page</a></h3>
+<p>On dispose de deux techniques de définition de notes de bas de pages :
+ les notes par référence et les notes inlines. Quel que soit le type de 
+note, l'ensemble des notes seront automatiquement numérotées par Pandoc 
+de façon continue pour tout le document. Le <code>texte de la note</code> peut bien entendu faire l'objet d'un formatage Markdown, contenir des liens, etc...</p>
+<p>S'agissant d'une conversion Pandoc en HTML (type de document où la 
+notion de "page" n'existe pas), toutes les notes seront rassemblées par 
+le <a href="#templates_pandoc">template</a> par défaut au bas de la page web, c'est-à-dire juste avant la balise <code>&lt;/body&gt;</code>, dans une division <code>&lt;div class="footnotes"&gt;</code> débutant par un trait horizontal <code>&lt;hr /&gt;</code> et sous forme d'une liste numérotée.</p>
+<p>Voyez aussi l'alternative aux notes de bas de page offerte par les <a href="#listes_ref">listes numérotées référençables</a>.</p>
+<p><strong>A)</strong> Les <strong>notes par référence</strong> sont définies en deux étapes :</p>
+<ol style="list-style-type: decimal">
+<li><p>la note proprement dite, selon la syntaxe suivante : <code>[^noteId]: texte de la note</code><br> • les notes peuvent être définies n'importe où dans le document<br> • le label <code>noteId</code> est case-sensitive et ne peut pas contenir d'<em>espace</em><br> • notez bien le caractère circonflexe <code>^</code> précédant directement le label <code>noteId</code><br> • notez aussi le double point <code>:</code> suivant directement le crochet <code>]</code></p></li>
+<li><p>au fil du texte (inline), on insère tout simplement la référence vers la note avec : <code>[^noteId]</code></p></li>
+</ol>
+<p>Notez que le label <code>[^noteId]</code> est uniquement utilisé pour corréler la référence de la note avec la note elle-même.</p>
+<p><strong>B)</strong> Les <strong>notes inlines</strong> seront saisies au fil du texte tout simplement selon la syntaxe suivante : <code>^[texte de la note]</code><br>Notez bien le caractère circonflexe <code>^</code> précédant directement le crochet <code>[</code></p>
+<p>Dans l'exemple ci-dessous, la note Markdown est définie par 
+référence, et le terme Pandoc fait l'objet d'une note inline. Mais 
+toutes deux sont automatiquement déportées au bas de la présente page 
+web !</p>
+<div class="g">
+<pre><code>Markdown[^mdown] est une syntaxe légère d'écriture
+de documents.
+
+[^mdown]: Markdown:
+&lt;http://daringfireball.net/projects/markdown/&gt;
+
+Pandoc^[Pandoc: &lt;http://johnmacfarlane.net/pandoc/&gt;]
+est un convertisseur de documents...</code></pre>
+</div>
+<div class="do">
+<p>Markdown<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> est une syntaxe légère d'écriture de documents.</p>
+<p>Pandoc<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> est un convertisseur de documents...</p>
+</div>
+<div class="f">
+
+</div>
+<h3 id="tableaux"><a href="#tableaux"><span class="header-section-number">3.2.9</span> Tableaux</a></h3>
+<p>Pandoc comble, dans ce domaine, l'une des grandes lacunes de la 
+syntaxe de base Markdown en offrant pas moins de 4 syntaxes de 
+définition de tableaux. Les 3 premières nécessitent l'usage d'une police
+ de caractères en chasse fixe (pour définir l'alignement...), ce qui 
+n'est pas le cas de la 4ème.</p>
+<p>Par défaut les tableaux produits par Pandoc sont calés sur la gauche 
+de la page, les bordures ne sont pas visibles, et la légende est placée 
+au-dessus du tableau. Vous pouvez par exemple changer cela avec les 
+directives CSS suivantes :</p>
+<pre class="sourceCode css"><code class="sourceCode css">table          <span class="kw">{</span> <span class="kw">margin:</span> <span class="dt">auto</span><span class="kw">;</span> <span class="kw">}</span>                  <span class="co">/* centre le tableau dans la page */</span>
+table, th, td  <span class="kw">{</span> <span class="kw">border-collapse:</span> <span class="dt">collapse</span><span class="kw">;</span> <span class="kw">border:</span> <span class="dt">solid</span> <span class="dt">1px</span> <span class="dt">#999</span><span class="kw">;</span> <span class="kw">padding:</span> <span class="dt">3px</span><span class="kw">;</span> <span class="kw">}</span>  <span class="co">/* ajout bordures */</span>
+caption        <span class="kw">{</span> <span class="kw">caption-side:</span> <span class="dt">bottom</span><span class="kw">;</span> <span class="kw">}</span>          <span class="co">/* déplace la légende en-dessous du tableau */</span></code></pre>
+<h4 id="tableau-simple"><a href="#tableau-simple"><span class="header-section-number">3.2.9.1</span> Tableau simple</a></h4>
+<p>La syntaxe de ce type de tableau est la suivante :</p>
+<ul>
+<li>d'abord une ligne définissant le texte des en-têtes</li>
+<li>suivie d'une ligne composée de groupes de tirets définissant le 
+nombre de colonnes ainsi que le type d'alignement dans celles-ci (défini
+ relativement aux en-têtes précitées)</li>
+<li>puis, pour chaque ligne du tableau, une ligne de texte définissant le contenu des cellules</li>
+<li>puis une ligne de tirets ; celle-ci est optionnelle si le tableau 
+comporte des en-têtes, mais obligatoire s'il n'en contient pas !</li>
+<li>si l'on désire finalement une légende de tableau (<code>&lt;caption&gt;</code>) : une ligne vide, puis une ligne commençant par le caractère double-point <code>:</code> suivi du texte de la légende</li>
+</ul>
+<p>Le <strong>type d'alignement</strong> dans chaque colonne (à gauche, à
+ droite, centré) est déterminé par la position du texte des en-têtes 
+relativement aux groupes de tirets définis dans ligne suivante. Prenez 
+garde que le texte des en-têtes ainsi que le contenu des cellules ne 
+déborde pas à gauche ou à droite du groupe de tirets correspondants, 
+faute de quoi le texte sera tronqué et placé dans 2 colonnes !</p>
+<div class="g">
+<pre><code>Aligné à gauche        Aligné à droite    Texte centré
+------------------  ------------------  -----------------
+  abcdef                1234              xyz
+
+: Légende du tableau...</code></pre>
+</div>
+<div class="center border shadow">
+<p><br></p>
+<table>
+<caption>Légende du tableau...</caption>
+<thead>
+<tr class="header">
+<th align="left">Aligné à gauche</th>
+<th align="right">Aligné à droite</th>
+<th align="center">Texte centré</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">abcdef</td>
+<td align="right">1234</td>
+<td align="center">xyz</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="f">
+
+</div>
+<h4 id="tableau-multiligne"><a href="#tableau-multiligne"><span class="header-section-number">3.2.9.2</span> Tableau multiligne</a></h4>
+<p>Les cellules peuvent ici contenir du texte sur plusieurs lignes. La syntaxe est similaire aux tableaux simples, sauf que :</p>
+<ul>
+<li>une ligne de tirets doit précéder la définition des en-têtes</li>
+<li>le contenu de chaque ligne de tableau est défini par une ou plusieurs lignes de texte suivie(s) obligatoirement d'une ligne vide</li>
+<li>la fin du tableau doit être signalée par une ligne de tirets puis une ligne vide</li>
+<li>on peut facultativement ajouter à la suite une légende de tableau</li>
+</ul>
+<div class="g">
+<pre><code>--------------------------------------------------------
+Aligné à gauche                 Centré dans la colonne
+-------------------------   ----------------------------
+  Plusieurs lignes de        Usage des styles Markdown:
+ texte dans la cellule !       **gras** _italique_,
+                             &lt;u&gt;balises&lt;/u&gt; HTML...
+
+Insertion `de code`          Mais hélas pas de listes !
+--------------------------------------------------------
+
+: Légende du tableau...</code></pre>
+</div>
+<div class="center border shadow">
+<p><br></p>
+<table>
+<caption>Légende du tableau...</caption>
+<colgroup><col width="38%">
+<col width="38%">
+</colgroup><thead>
+<tr class="header">
+<th align="left">Aligné à gauche</th>
+<th align="center">Centré dans la colonne</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Plusieurs lignes de texte dans la cellule !</td>
+<td align="center">Usage des styles Markdown: <strong>gras</strong> <em>italique</em>, <u>balises</u> HTML...</td>
+</tr>
+<tr class="even">
+<td align="left">Insertion <code>de code</code></td>
+<td align="center">Mais hélas pas de listes !</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="f">
+
+</div>
+<h4 id="tableau-en-grille"><a href="#tableau-en-grille"><span class="header-section-number">3.2.9.3</span> Tableau en grille</a></h4>
+<p>L'avantage par rapport au tableau multiligne est ici de pouvoir 
+définir des listes dans les cellules, mais l'alignement n'est pas 
+supporté et la syntaxe est plus complexe et :</p>
+<ul>
+<li>le nombre de tirets dans la première ligne défini la largeur des colonnes</li>
+<li>une ligne de caractères égal <code>=</code> sépare la définition des en-têtes du contenu (pouvant être omise pour un tableau sans en-têtes)</li>
+<li>définition des colonnes avec les caractères <code>|</code> et <code>+</code></li>
+<li>vous constaterez que les <code>|</code> doivent être soigneusement alignés pour que le texte ne soit pas découpé/dispersé dans plusieurs cellules</li>
+</ul>
+<div class="g">
+<pre><code>+----------------------------+-------+
+| En-tête                    | etc... |
++===+===+
+| Plusieurs lignes de texte  | - liste |
+| dans la même cellule, mais | - à puces |
+| toujours aligné à gauche ! |
++---+---+
+| Texte _formaté_,           | #. liste |
+| `code`, etc...             | #. numérotée |
++---+---+
+
+: Légende du tableau...</code></pre>
+</div>
+<div class="center border shadow">
+<p><br></p>
+<table>
+<caption>Légende du tableau...</caption>
+<colgroup><col width="40%">
+<col width="11%">
+</colgroup><thead>
+<tr class="header">
+<th align="left">En-tête</th>
+<th align="left">etc...</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p>Plusieurs lignes de texte dans la même cellule, mais toujours aligné à gauche !</p></td>
+<td align="left"><ul>
+<li>liste</li>
+<li>à puces</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td align="left"><p>Texte <em>formaté</em>, <code>code</code>, etc...</p></td>
+<td align="left"><ol>
+<li>liste</li>
+<li>numérotée</li>
+</ol></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="f">
+
+</div>
+<h4 id="pipe-table"><a href="#pipe-table"><span class="header-section-number">3.2.9.4</span> Pipe table</a></h4>
+<p>Implémenté depuis Pandoc 1.10, la syntaxe de ce type de tableau est 
+très naturelle et légère. Son seul inconvénient est de ne pas supporter 
+des cellules contenant plusieurs lignes de texte. Le type d'alignement 
+dans chaque colonne (à gauche, à droite, centré) est astucieusement 
+défini dans la seconde ligne par la position du caractère double point <code>:</code>
+ relativement aux tirets (donc beaucoup moins contraignant que de devoir
+ aligner le texte sur les tirets comme dans les précédents types de 
+tableaux, et n'obligeant ainsi pas d'éditer le code source avec une 
+fonte en chasse fixe).</p>
+<p>A des fins esthétiques, vous pouvez débuter et terminer chaque ligne par <code>|</code>, mais ce n'est pas obligatoire. Le nombre de tirets dans la seconde ligne n'est pas significatif.</p>
+<div class="g">
+<pre><code>Aligné à gauche | Aligné à droite | Texte centré | Défaut
+:---|---:|:---:|---
+abcdef | 1234 | xyz | etc
+ghi jkl mno pqr | 567890 | ........ | etc
+
+: Légende du tableau...</code></pre>
+</div>
+<div class="center border shadow">
+<p><br></p>
+<table>
+<caption>Légende du tableau...</caption>
+<thead>
+<tr class="header">
+<th align="left">Aligné à gauche</th>
+<th align="right">Aligné à droite</th>
+<th align="center">Texte centré</th>
+<th align="left">Défaut</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">abcdef</td>
+<td align="right">1234</td>
+<td align="center">xyz</td>
+<td align="left">etc</td>
+</tr>
+<tr class="even">
+<td align="left">ghi jkl mno pqr</td>
+<td align="right">567890</td>
+<td align="center">........</td>
+<td align="left">etc</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="f">
+
+</div>
+<h3 id="metadonnees_pandoc"><a href="#metadonnees_pandoc"><span class="header-section-number">3.2.10</span> Métadonnées du document (bloc de titre)</a></h3>
+<p>Au tout début du document (donc sans insérer de contenu ou de lignes 
+vides avant !) il est possible de spécifier, au moyen de 3 lignes 
+débutant par le caractère pour-cent <code>%</code> :</p>
+<ul>
+<li>1ère ligne : le <strong>titre</strong> du document (qui générera en HTML à la fois le <code>&lt;title&gt;</code> de la page et le premier titre <code>&lt;h1&gt;</code>)</li>
+<li>2ème ligne : le nom du(des) <strong>auteur</strong>(s) (qui produira également en HTML la méta-information <code>&lt;meta name="author" ...&gt;</code>)</li>
+<li>3ème ligne : la <strong>date</strong> de révision du document</li>
+</ul>
+<p>Si l'une ou l'autre de ces informations doit être omise, laissez le caractère <code>%</code>
+ suivi d'une ligne vide. Si le titre ou la définition des auteurs 
+nécessitent plusieurs lignes de texte, on peut faire usage de lignes 
+supplémentaires pour autant qu'elles débutent par un <em>espace</em>.</p>
+<p>La conversion Pandoc en HTML avec le <a href="#templates_pandoc">template</a> par défaut insérera, pour autant que l'option <code>-s</code> ou <code>--standalone</code> soit utilisée, juste après la balise <code>&lt;body&gt;</code> et avant l'éventuelle table des matières : le titre dans une structure <code>&lt;h1 class="title"&gt;</code>, l'auteur dans une structure <code>&lt;h2 class="author"&gt;</code>, et la date dans une structure <code>&lt;h3 class="date"&gt;</code> (éléments que vous pouvez donc styler par CSS).</p>
+<p>Comme vous le voyez dans l'exemple ci-dessous, on peut faire usage du formatage Markdown (styles, liens...) dans ces éléments.</p>
+<div class="g">
+<pre><code>% Introduction à **Markdown** et **Pandoc**
+% [J.-D. Bonjour](mailto:jean-daniel.bonjour@epfl.ch), EPFL
+% rév. 12.4.2013
+
+suite du document...</code></pre>
+</div>
+<div class="f">
+
+</div>
+<h3 id="comportement-de-pandoc-par-rapport-au-code-html-inclus"><a href="#comportement-de-pandoc-par-rapport-au-code-html-inclus"><span class="header-section-number">3.2.11</span> Comportement de Pandoc par rapport au code HTML inclus</a></h3>
+<p>Le <strong>code HTML</strong> inclus dans un fichier Markdown est passé tel quel par Pandoc dans le cas d'une conversion en HTML ou en slide shows HTML.</p>
+<p>Lorsque l'on définit des <strong>blocs</strong> HTML (<code>&lt;div&gt;</code>, <code>&lt;table&gt;</code>...), Pandoc interprète la syntaxe Markdown à l'intérieur de ceux-ci, contrairement au convertisseur <code>Markdown.pl</code>
+ original. A titre d'exemple, et pour des raisons de mise en page 
+(placement côte à côte du code Markdown et de son rendu HTML), le 
+présent document fait massivement usage de <code>&lt;div&gt;</code> HTML à l'intérieur desquelles nous utilisons la syntaxe Markdown.</p>
+<p>Il y a deux exceptions à cela : le texte compris dans des blocs <code>&lt;script&gt;</code> ou <code>&lt;style&gt;</code> ne sera jamais interprété comme du Markdown... ce qui est finalement tout-à-fait logique !</p>
+<h3 id="gestion-de-citations-et-références-bibliographiques"><a href="#gestion-de-citations-et-r%C3%A9f%C3%A9rences-bibliographiques"><span class="header-section-number">3.2.12</span> Gestion de citations et références bibliographiques</a></h3>
+<p>Pandoc permet la gestion de citations et références bibliographiques 
+dans de nombreux formats (BibTeX/bib, MODS, RIS, ISI/wos, MedLine, 
+Copac, JSON, EndNote enl/xml...) et s'interface avec l'excellent 
+logiciel libre <a href="http://www.zotero.org/">Zotero</a>. Si vous êtes intéressé par ces possibilités, voyez <code>man pandoc</code> sous Linux ou Mac OS X, ou le "Pandoc User's Guide" sous Windows (au chapitre "Citations").</p>
+<h3 id="exemples_slide_shows"><a href="#exemples_slide_shows"><span class="header-section-number">3.2.13</span> Réalisation de slide shows HTML</a></h3>
+<p>Avec certaines <a href="#options_slide_shows">options spécifiques</a> de la commande <code>pandoc</code> présentées plus bas, il est très aisé de réaliser des slide shows HTML.</p>
+<p>Le document Markdown sera découpé en slides selon les principes suivants :</p>
+<ul>
+<li>un trait horizontal (suite de tirets <code>-----</code> produisant <code>&lt;hr /&gt;</code> en HTML) fait débuter un nouveau slide sans titre</li>
+<li>un titre de niveau identique au <code>level_number</code> (spécifié par l'option <code>--slide-level</code>) débute un nouveau slide</li>
+<li>un titre de niveau inférieur au <code>level_number</code> génère un sous-titre dans le slide courant</li>
+<li>un titre de niveau supérieur au <code>level_number</code> génère un slide de titre ne contenant que celui-ci</li>
+</ul>
+<p>Les <a href="#metadonnees_pandoc">métadonnées</a> du document généreront la page de titre du slide show.</p>
+<p>Pour <em>styler</em> les slide shows, voyez <code>man pandoc</code> sous Linux ou Mac OS X, ou le "Pandoc User's Guide" sous Windows.</p>
+<div class="g">
+<pre><code>% Slide show Pandoc
+% &lt;jean-daniel.bonjour@epfl.ch&gt;, EPFL
+% 12.4.2013
+
+# Premier slide
+
+Liste à puce
+
+* Pomme
+    - golden
+    - boskoop
+* Poire
+
+Liste numérotée
+
+1. Chat
+#. Chien
+
+# Second slide
+
+## Titre 2e niveau
+
+Paragraphe de texte
+
+## Autre titre 2e niveau
+
+Ci-après saut manuel de slide
+
+-----------------
+
+**Slide sans titre**
+
+Insertion d'image ou figure :
+
+![Automne](markdown-large.png "Image...")</code></pre>
+</div>
+<div class="do">
+<p>Voyez le résultat sous forme de slide show :</p>
+<ul>
+<li><a href="http://enacit1.epfl.ch/markdown-pandoc/slide-show/slide-show-s5.html">S5</a></li>
+<li><a href="http://enacit1.epfl.ch/markdown-pandoc/slide-show/slide-show-slidy.html">Slidy</a></li>
+<li><a href="http://enacit1.epfl.ch/markdown-pandoc/slide-show/slide-show-slideous.html">Slideous</a> (probablement le plus abouti, mais actuellement <strong>bugé</strong> : on est en mode impression et on ne peut pas passer en mode slide avec barre de navigation comme c'est le cas <a href="http://goessner.net/articles/slideous/slideous.html">ici</a>)</li>
+<li><a href="http://enacit1.epfl.ch/markdown-pandoc/slide-show/slide-show-dzslides.html">DZSlides</a></li>
+<li>Revealjs (voir exemple <a href="http://johnmacfarlane.net/pandoc/demo/example16d.html">ici</a>)</li>
+</ul>
+</div>
+<div class="f">
+
+</div>
+<p>Il est en outre possible de faire des slide shows PDF basés LaTeX beamer.</p>
+<h3 id="possibilités-de-pandoc-en-relation-avec-texlatex"><a href="#possibilit%C3%A9s-de-pandoc-en-relation-avec-texlatex"><span class="header-section-number">3.2.14</span> Possibilités de Pandoc en relation avec TeX/LaTeX</a></h3>
+<p>L'objectif de ce document n'est pas de couvrir les fonctionnalités de
+ Pandoc en relation avec TeX/LaTeX. Mais pour les personnes intéressées,
+ sachez notamment que :</p>
+<ul>
+<li>Pandoc est capable de lire et convertir au format LaTeX</li>
+<li>on peut insérer du code LaTeX, TeX et ConTeXt dans des documents 
+Markdown, ce contenu étant passé tel quel par Pandoc dans le cas d'une 
+conversion en LaTeX et ConTeX</li>
+<li>on a vu plus haut qu'il est possible d'insérer des formules <a href="#tex_math">TeX Math</a> qui seront proprement affichées en HTML</li>
+<li>il est aussi possible de faire usage de macros <code>\newcommand</code> et <code>\renewcommand</code></li>
+<li>on peut afficher du code LaTeX avec coloration syntaxique</li>
+</ul>
+<p>Pour davantage d'informations à ce sujet, voyez <code>man pandoc</code> sous Linux ou Mac OS X, ou le "Pandoc User's Guide" sous Windows.</p>
+<h3 id="templates_pandoc"><a href="#templates_pandoc"><span class="header-section-number">3.2.15</span> Usage de templates Pandoc</a></h3>
+<p>Lorsque l'on exécute <code>pandoc</code> avec l'option <code>-s</code> (ou <code>--standalone</code>), Pandoc incorpore au fichier de sortie diverses informations (p.ex. le bloc <code>&lt;head&gt;...&lt;/head&gt;</code> pour une conversion en HTML) structurées selon le <em>template</em> par défaut correspondant au format de sortie. L'utilisateur peut cependant élaborer et fournir son propre <code>fichier</code> template avec l'option <code>--template=fichier</code></p>
+<p>Le template par défaut relatif à un <code>format</code> donné peut être visualisé avec la commande : <code>pandoc -D format</code>. Nous vous laissons examiner celui correspondant au format de sortie HTML en passant la commande <code>pandoc -D html</code>. Vous y verrez tout le code HTML inclus par l'option <code>-s</code>, ainsi que des directives et variables entourées de caractères <code>$ $</code>. Certaines de ces variables sont prédéfinies par Pandoc, telles que : <code>$toc$</code> (code généré de la table des matières), <code>$body$</code> (code proprement dit résultant de la conversion Pandoc)...</p>
+<p>En créant votre propre fichier template, il vous sera possible de définir vos propres <code>variables</code> et injecter ainsi du contenu aux emplacements correspondants dans le fichier de sortie en passant les <code>valeurs</code> de ces variables avec l'option <code>pandoc -V variable=valeur</code>. A titre d'exemple, voyez <a href="https://github.com/jgm/pandoc/wiki/How-to-add-a-%22Table-of-Contents%22-title-in-the-HTML-template">cette page</a> qui indique comment vous pourriez ajouter un titre au-dessus de la table des matières.</p>
+<p>Pour en savoir plus sur ce mécanisme (notamment sur la signification des variables prédéfinies ainsi que l'usage des directives <code>if</code> et <code>for</code>), voyez <code>man pandoc</code> sous Linux ou Mac OS X, ou le "Pandoc User's Guide" sous Windows.</p>
+<h3 id="autres-possibilités-en-relation-avec-pandoc"><a href="#autres-possibilit%C3%A9s-en-relation-avec-pandoc"><span class="header-section-number">3.2.16</span> Autres possibilités en relation avec Pandoc</a></h3>
+<p>Il existe de nombreux outils liées à Pandoc (voir <a href="https://github.com/jgm/pandoc/wiki/Pandoc-Extras">cette page</a>). Mentionnons en particulier :</p>
+<ul>
+<li><a href="http://gitit.johnmacfarlane.net/">Gitit</a> : logiciel de wiki s'appuyant sur le backend Git et utilisant la syntaxe Markdown/Pandoc</li>
+<li><a href="https://github.com/chdemko/apache-pandoc">apache-pandoc</a> : extension au serveur Apache permettant de servir des pages web écrite en Markdown/Pandoc</li>
+</ul>
+<h2 id="installation-de-pandoc"><a href="#installation-de-pandoc"><span class="header-section-number">3.3</span> Installation de Pandoc</a></h2>
+<p>Les explications originales relatives à l'installation de Pandoc sont accessibles sur le <a href="http://johnmacfarlane.net/pandoc/installing.html">site Pandoc</a>.</p>
+<h3 id="sous-gnulinux"><a href="#sous-gnulinux"><span class="header-section-number">3.3.1</span> Sous GNU/Linux</a></h3>
+<p>La méthode la plus simple consiste à installer la version de Pandoc 
+packagée dans le dépôt officiel de votre distribution Linux. Sous Debian
+ et dérivés ainsi que Fedora, il s'agit du package nommé <code>pandoc</code> que l'on installe donc de façon habituelle avec : <code>sudo apt-get install pandoc</code> (Debian/Ubuntu) ou <code>yum install pandoc</code>
+ (Fedora). On obtiendra cependant ainsi des versions de Pandoc anciennes
+ dans lesquelles nombre de possibilités présentées ci-dessus ne sont pas
+ encore implémentées.</p>
+<p>Pandoc évoluant très rapidement, si vous souhaitez bénéficier des 
+dernières évolutions de ce convertisseur (et dernières extensions 
+apportées à Markdown !), étant donné qu'il n'existe actuellement sous 
+Ubuntu pas de PPA (dépôt alternatif de paquets logiciels) relatif à 
+Pandoc, il s'agit donc de l'installer/compiler soi-même en procédant 
+ainsi :</p>
+<ol style="list-style-type: decimal">
+<li>installation préalable de la plateforme Haskell (langage de programmation fonctionnel dans lequel est écrit Pandoc) avec : <code>sudo apt-get install haskell-platform</code> (une soixantaine de packages seront installés occupant ~500 MB)</li>
+<li>puis installation/compilation proprement dite de Pandoc avec : <code>cabal update &amp;&amp; cabal install pandoc</code>
+ (ne prenez pas garde aux messages d'avertissement) ; cette commande 
+pourra être ultérieurement répétée pour bénéficier des mises à jour de 
+Pandoc</li>
+<li>l'installation s'effectue alors pour l'utilisateur courant dans le répertoire <code>~/.cabal</code> (arborescence <em>standalone</em> qui pourrait être copiée sur une autre machine), l'exécutable étant <code>~/.cabal/bin/pandoc</code></li>
+<li>mettez à jour votre variable d'environnement <code>PATH</code> en conséquence (en introduisant p.ex. la ligne <code>export PATH="$HOME/.cabal/bin:$PATH"</code> au bas de votre prologue <code>~/.profile</code>)</li>
+</ol>
+<p>La procédure est similaire sous Fedora.</p>
+<h3 id="sous-windows"><a href="#sous-windows"><span class="header-section-number">3.3.2</span> Sous Windows</a></h3>
+<p>Téléchargez l'installeur <code>pandoc-&lt;version&gt;-windows.msi</code> depuis <a href="https://github.com/jgm/pandoc/releases">ce lien</a>,
+ et exécutez-le avec des droits d'administration. L'installation 
+s'effectue automatiquement dans le compte de l'utilisateur courant 
+(dossier <code>C:\Users\&lt;username&gt;\AppData\Local\Pandoc</code>). La variable <code>PATH</code> de l'utilisateur est complétée de façon que la commande <code>pandoc</code>
+ soit accessible depuis n'importe quel répertoire (dans une fenêtre 
+"Invite de commande"). Finalement le menu Démarrer de l'utilisateur est 
+complété par un raccourci vers le "Pandoc User's Guide".</p>
+<h3 id="sous-mac-os-x"><a href="#sous-mac-os-x"><span class="header-section-number">3.3.3</span> Sous Mac OS X</a></h3>
+<p>Téléchargez l'installeur <code>pandoc-&lt;version&gt;-osx.pkg</code> depuis <a href="https://github.com/jgm/pandoc/releases">ce lien</a>, exécutez-le et suivez les indications.</p>
+<h3 id="quel-que-soit-le-système-dexploitation"><a href="#quel-que-soit-le-syst%C3%A8me-dexploitation"><span class="header-section-number">3.3.4</span> Quel que soit le système d'exploitation</a></h3>
+<p>Pour être en mesure de faire une conversion directe <strong>Markdown → PDF</strong>, Pandoc nécessite qu'un environnement <strong>LaTeX</strong> soit présent sur votre machine, par exemple :</p>
+<ul>
+<li><a href="http://www.tug.org/texlive/">TeX Live</a> sous Linux : sous Debian, p.ex. installé via le méta-package <code>texlive-latex-recommended</code>(plus de 200 MB) ou<code>texlive-base</code> (48 MB)</li>
+<li><a href="http://miktex.org/">MiKTeX</a> sous Windows</li>
+<li><a href="http://www.tug.org/mactex/morepackages.html">BasicTeX</a> sous Mac OS X</li>
+</ul>
+<p>Une alternative, présentée plus bas, consiste à effectuer une 
+conversion Markdown → HTML avec Pandoc, puis HTML → PDF avec un autre 
+outil.</p>
+<h2 id="commande_pandoc"><a href="#commande_pandoc"><span class="header-section-number">3.4</span> Utilisation du convertisseur Pandoc</a></h2>
+<h3 id="syntaxe-de-la-commande"><a href="#syntaxe-de-la-commande"><span class="header-section-number">3.4.1</span> Syntaxe de la commande</a></h3>
+<p>Pandoc est un outil qui s'utilise en ligne de commande, donc a priori
+ plutôt dans une fenêtre terminal ! Si cela ne vous convient pas, nous 
+vous indiquons au chapitre <a href="#editeurs_markdown">Éditeurs</a> comment définir les commandes de conversion utiles dans l'éditeur.</p>
+<p>Comme vu plus haut, souvenez-vous que Pandoc travaille exclusivement avec l'<a href="#encodage_utf8">encodage de caractères UTF-8</a>.</p>
+<p>La forme générale de la commande Pandoc est la suivante : <code>pandoc option(s) fichier(s)_entree</code> ou <code>pandoc option(s) URL</code>. Voici quelques exemples :</p>
+<dl>
+<dt><code>pandoc -o sortie.out entree1.in entree2.in</code></dt>
+<dd><p>Convertit le résultat de la concaténation des fichiers <code>entree1.in entree2.in</code> dans le fichier <code>sortie.out</code>. Le format d'entrée est automatiquement déduit de l'extension <code>.in</code> des fichiers d'entrée (p.ex. <code>.md</code> ⇒ Markdown/Pandoc), et le format de sortie de l'extension <code>.out</code> du fichier de sortie (p.ex. <code>.html</code> ⇒ HTML). Il n'y a pas d'extension spécifique relative au format Markdown/Pandoc étendu.</p>
+</dd>
+<dt><code>pandoc -f html -t markdown url</code></dt>
+<dd><p>Convertit en "Markdown étendu" la page web correspondant à l'<code>url</code> spécifiée, et envoie le résultat sur la sortie standard.</p>
+</dd>
+<dt><code>pandoc -o sortie.odt entree.md</code></dt>
+<dd><p>Convertit le fichier Markdown/Pandoc <code>entree.md</code> en un fichier <code>sortie.odt</code> au format ODF (LibreOffice Writer).</p>
+</dd>
+</dl>
+<h3 id="options-principales-de-la-commande"><a href="#options-principales-de-la-commande"><span class="header-section-number">3.4.2</span> Options principales de la commande</a></h3>
+<p>Parmi les très nombreuses <code>options</code> de la commande Pandoc,
+ nous ne présentons ci-après que celles qui nous semblent les plus 
+utiles pour un usage courant. Sachez que :</p>
+<ul>
+<li>toutes les options disponibles sont indiquées par les commandes <code>pandoc -h</code> et <code>pandoc --help</code></li>
+<li>la description détaillée de celles-ci est accessible avec <code>man pandoc</code> sous Linux ou Mac OS X, ou dans le "Pandoc User's Guide" sous Windows</li>
+</ul>
+<h4 id="options-générales"><a href="#options-g%C3%A9n%C3%A9rales"><span class="header-section-number">3.4.2.1</span> Options générales</a></h4>
+<dl>
+<dt><code>-o fichier.ext</code></dt>
+<dd><p>Définit le nom du fichier de sortie, et déduit le <code>format</code> à partir de l'extension <code>ext</code> spécifiée. Sans cette option, le résultat de la conversion est envoyé sur la sortie standard.</p>
+</dd>
+<dt><code>-f format</code> ou <code>--from format</code> ou <code>-r format</code> ou <code>--read format</code></dt>
+<dd><p>Définit explicitement le <code>format</code> d'entrée (prime sur le format dérivé de l'extension du fichier d'entrée)</p>
+</dd>
+<dt><code>-t format</code> ou <code>--to format</code> ou <code>-w format</code> ou <code>--write format</code></dt>
+<dd><p>Définit explicitement le <code>format</code> de sortie (prime sur le format dérivé de l'extension du fichier de sortie)</p>
+</dd>
+</dl>
+<p>Tous les <code>formats</code> d'entrée et sortie supportés sont indiqués par la commande <code>pandoc -h</code>, ou par <code>man pandoc</code> sous les options <code>-f</code> et <code>-t</code>. Le format <code>markdown</code> désigne le <em>Pandoc extended Markdown</em>, et <code>markdown_strict</code> utiliserait l'<em>original unextended markdown</em> (ignorant les extensions Pandoc).</p>
+<dl>
+<dt><code>-s</code> ou <code>--standalone</code></dt>
+<dd>Applique le <em>template par défaut</em> associé au type de fichier de sortie (voyez notre chapitre sur les <a href="#templates_pandoc">templates</a>). S'agissant d'une conversion en HTML, ce template (visible par la commande <code>pandoc -D html</code>) ajoute donc notamment le bloc <code>&lt;html&gt;&lt;head&gt;...&lt;/head&gt;</code> ainsi que les balises <code>&lt;body&gt;</code> et <code>&lt;/body&gt;&lt;/html&gt;</code>. L'option <code>--template=fichier</code> permettrait d'utiliser son propre <code>fichier</code> de template.
+</dd>
+</dl>
+<h4 id="conversion-en-html"><a href="#conversion-en-html"><span class="header-section-number">3.4.2.2</span> Conversion en HTML</a></h4>
+<dl>
+<dt><code>-c fichier.css</code> ou <code>--css=fichier.css</code></dt>
+<dd><p>Associe la feuille de style <code>fichier.css</code> au fichier HTML généré</p>
+</dd>
+<dt><code>-H header.html -B body.html -A footer.html</code></dt>
+<dd><p>Insère respectivement :</p>
+<ul>
+<li>le contenu de <code>header.html</code> (p.ex. du CSS, JavaScript...) juste avant la balise <code>&lt;/head&gt;</code></li>
+<li>le contenu de <code>body.html</code> juste après la balise <code>&lt;body&gt;</code></li>
+<li>le contenu <code>footer.html</code> juste avant la balise <code>&lt;/body&gt;</code></li>
+</ul>
+</dd>
+<dd><p>Le fait d'utiliser l'une ou l'autre de ces options active implicitement l'option <code>-s</code></p>
+</dd>
+<dt><code>--ascii</code></dt>
+<dd><p>Convertit tous les caractères accentués en leur équivalent HTML (p.ex. <code>&amp;amp;</code> pour &amp;)</p>
+</dd>
+<dt><code>-S</code> (S majuscule) ou <code>--smart</code></dt>
+<dd><p>Convertit certains caractères en leur équivalent typographique 
+correct, par exemple : "guillemets" en “guillemets”, 'accents' en 
+‘accents’, ... en … (un seul caractère), --- en — (em-dash), etc...</p>
+</dd>
+<dt><code>--self-contained</code></dt>
+<dd><p>Produit un document HTML entièrement <em>standalone</em>, c'est-à-dire sans dépendances externes. Les images sont ainsi incorporées sous la forme <code>&lt;img src="data: ..." /&gt;</code>, les feuilles de style avec <code>&lt;link href="data:text/css,..." type="text/css" /&gt;</code>, les scripts JavaScript, etc... Très utile pour les slide shows !</p>
+</dd>
+</dl>
+<h4 id="options_tex_math"><a href="#options_tex_math"><span class="header-section-number">3.4.2.3</span> Rendu des formules TeX Math en HTML</a></h4>
+<p>Les formules TeX Math (voir <a href="#tex_math">exemple</a> plus haut) sont converties en <a href="http://www.w3.org/TR/MathML3/">MathML</a>
+ pour être affichées dans les navigateurs web supportant ce standard du 
+W3C. On utilise pour cela l'une des options de conversion suivantes :</p>
+<dl>
+<dt><code>-s --latexmathml</code></dt>
+<dd><p>Utilise le convertisseur <a href="http://math.etsu.edu/LaTeXMathML/">LaTeXMathML</a> dont le code JavaScript est automatiquement inséré dans le header HTML.</p>
+</dd>
+<dt><code>-s --mathml</code></dt>
+<dd><p>Utilise un autre script MathML dont le code JavaScript est également automatiquement inséré dans le header HTML.</p>
+</dd>
+<dt><code>-s --mathjax</code></dt>
+<dd><p>Utilise en ligne le script <a href="http://www.mathjax.org/">MathJax</a> en insérant un lien dans le header HTML.</p>
+</dd>
+<dt><code>-s --jsmath=script.js</code></dt>
+<dd><p>Utilise le script <a href="http://www.math.union.edu/%7Edpvc/jsmath/">jsMath</a> dont il s'agit de fournir le <code>script.js</code></p>
+</dd>
+</dl>
+<h4 id="num_titres_tdm"><a href="#num_titres_tdm"><span class="header-section-number">3.4.2.4</span> Numérotation des titres, table des matières</a></h4>
+<dl>
+<dt><code>-N</code> ou <code>--number-sections</code></dt>
+<dd><p>Numérote automatiquement les titres et sous-titres <code>&lt;h*&gt;</code>. Utiliser l'option <code>--number-offset=numero(s)</code> pour faire débuter la numérotation au(x) <code>numero(s)</code> +1 spécifié(s)</p>
+</dd>
+<dt><code>--toc</code> ou <code>--table-of-contents</code></dt>
+<dd><p>Incorpore une table des matières des titres. Sont collectés les titres du nombre de niveaux <code>levels</code> spécifié par l'option supplémentaire <code>--toc-depth=levels</code>. En l'absence de cette option, seuls les titres des 3 premiers niveaux sont collectés (en HTML: <code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>). Dans le cas d'une conversion en HTML, la table des matières est placée juste après la balise <code>&lt;body&gt;</code>. Cette option n'a pas d'effet si l'on produit des docbooks ou des slide shows.</p>
+</dd>
+</dl>
+<h4 id="conversion-en-pdf"><a href="#conversion-en-pdf"><span class="header-section-number">3.4.2.5</span> Conversion en PDF</a></h4>
+<p>La conversion <strong>Markdown → PDF</strong> directe par Pandoc 
+nécessite de disposer d'un environnement LaTeX sur sa machine. Une 
+manière alternative de procéder consiste à effectuer, en 2 étapes :</p>
+<ol style="list-style-type: decimal">
+<li>une conversion Markdown → HTML avec Pandoc</li>
+<li>puis une conversion HTML → PDF (associé à une bonne feuille de style
+ CSS) par votre navigateur web et un driver d'impression PDF, ou 
+directement en mode commande avec l'outil <code>wkhtmltopdf</code></li>
+</ol>
+<p>S'agissant de <code>wkhtmltopdf</code> (outil basé sur le moteur de rendu WebKit), vous trouvez sous <a href="http://wkhtmltopdf.org/downloads.html">ce lien</a> les installeurs pour tous les OS (le plus simple sous Ubuntu consistant à installer le package <code>wkhtmltopdf</code>). La conversion HTML → PDF s'effectue ensuite à l'aide de la commande : <code>wkhtmltopdf fichier.html fichier.pdf</code>. Des options de conversions sont disponibles (documentées sous <code>man wkhtmltopdf</code> et <code>wkhtmltopdf --extended-help</code>).</p>
+<h4 id="conversion-dans-dautres-formats"><a href="#conversion-dans-dautres-formats"><span class="header-section-number">3.4.2.6</span> Conversion dans d'autres formats</a></h4>
+<dl>
+<dt><code>--reference-odt=fichier</code></dt>
+<dd><p>Utilise le <code>fichier</code> ODT spécifié comme référence de styles pour la production d'un fichier ODT</p>
+</dd>
+<dt><code>--epub-stylesheet=fichier</code></dt>
+<dd>Utilise le <code>fichier</code> CSS spécifié comme référence de styles pour la production d'un fichier ePub.
+</dd>
+<dd><p>Il existe encore d'autres options <code>--epub-*</code></p>
+</dd>
+</dl>
+<h4 id="options_slide_shows"><a href="#options_slide_shows"><span class="header-section-number">3.4.2.7</span> Génération de slide shows</a></h4>
+<p>Les options ci-après sont spécifiques à la production de slide shows 
+aux formats HTML (S5, Slidy, Slideous, DZSlides, Revealjs) ou PDF (LaTeX
+ beamer). Voyez le résultat avec notre <a href="#exemples_slide_shows">exemple</a> ci-dessus.</p>
+<p><strong>Options générales</strong></p>
+<dl>
+<dt><code>--slide-level=level_number</code></dt>
+<dd><p>Critère de découpage du document en slides (voir <a href="#exemples_slide_shows">explications</a> plus haut).</p>
+</dd>
+<dt><code>-i</code> ou <code>--incremental</code></dt>
+<dd><p>Cette option fera apparaître les éléments de listes <strong>progressivement</strong>
+ à chaque clic de souris (sinon on passe directement au slide suivant). 
+Sans cette option il est cependant possible de faire défiler une liste 
+incrémentalement en la préfixant par <code>&gt;</code> (générant <code>&lt;blockquote&gt;</code> en HTML).</p>
+</dd>
+</dl>
+<p><strong>Spécification du slide engine</strong></p>
+<dl>
+<dt><code>-s -t s5 -i --slide-level=level_number --self-contained</code></dt>
+<dd><p>Produit un slide show HTML au format <strong>S5</strong> (Simple Standards-based Slide Show System). Avec l'option <code>--self-contained</code> le fichier HTML est totalement <em>standalone</em> (incorporation des données liées telles que les images...) ; il faut sinon disposer, dans le dossier courant, d'un dossier <code>s5/default</code> contenant divers fichiers (<code>slides.js, *.css, *.gif</code>) à télécharger depuis <a href="http://meyerweb.com/eric/tools/s5/">ce lien</a>.</p>
+</dd>
+<dd><p>Usage du clavier et de la souris :</p>
+<ul>
+<li>souris-Gauche, espace, curs-Droite, curs-Bas, PageDown : passe au prochain point dans le slide</li>
+<li>curs-Gauche, curs-Haut, PageUp : passe au précédent point dans le slide</li>
+<li>Déplacer le curseur dans l'angle inférieur droite du navigateur pour
+ voir apparaître les boutons d'avancement de slides, le bouton <code>Ø</code> d'affichage de tous les slides en mode texte, et le menu de sélectionnement de slides</li>
+</ul>
+</dd>
+<dt><code>-s -t slidy -i --slide-level=level_number --self-contained</code></dt>
+<dd><p>Produit un slide show HTML au format <strong>Slidy</strong>. Avec l'option <code>--self-contained</code> le fichier HTML est totalement <em>standalone</em>
+ (incorporation des données liées telles que les images...) ; il fait 
+sinon usage d'un JavaScript et d'un CSS en ligne via Internet.</p>
+</dd>
+<dd><p>Usage du clavier et de la souris :</p>
+<ul>
+<li>PageDown, PageUp : Passe au slide suivant / précédent</li>
+<li>souris-Gauche, espace, curs-Droite : Passe au prochain point dans le slide</li>
+<li>curs-Gauche : Passe au précédent point dans le slide</li>
+<li>C (ou lien "contents") : Menu de sélectionnement de slides</li>
+<li>curs-Haut, curs-Bas : Usage barre de défilement vertical</li>
+<li>S, B : Police plus petite (smaller) / grosse (bigger)</li>
+<li>F : Faire apparaître/disparaître barre du bas (bascule)</li>
+<li>K : Désactive / réactive souris (bascule)</li>
+<li>F11 : Passer en plein écran (bascule)</li>
+</ul>
+</dd>
+<dt><code>-s -t slideous --slide-level=level_number --self-contained</code></dt>
+<dd><p>Produit un slide show HTML au format <strong>Slideous</strong>. Avec l'option <code>--self-contained</code> le fichier HTML est totalement <em>standalone</em> (incorporation des données liées telles que les images...).</p>
+</dd>
+<dd><p>Usage du clavier et de la souris :</p>
+<ul>
+<li>PageDown/Return, PageUp : Passe au slide suivant / précédent</li>
+<li>souris-Gauche, espace, curs-Droite : Passe au prochain point dans le slide</li>
+<li>curs-Gauche : Passe au précédent point dans le slide</li>
+<li>Home, End : Premier / dernier slide</li>
+<li>C : Table des slides</li>
+<li>-, + : Police plus petite (smaller) / grosse (bigger)</li>
+<li>S : Faire apparaître/disparaître barre du bas (bascule)</li>
+<li>M : Désactive / réactive souris (bascule)</li>
+<li>P : Passe en mode impression (montre tous les slides) (bascule)</li>
+<li>F11 : Passe en plein écran (bascule)</li>
+</ul>
+</dd>
+<dt><code>-s -t dzslides -i --slide-level=level_number --self-contained</code></dt>
+<dd><p>Produit un slide show HTML au format <strong>DZSlides</strong>. Incorpore automatiquement dans le fichier HTML, même sans l'option <code>--self-contained</code>, le code JavaScript et CSS nécessaire. L'option <code>--self-contained</code> reste cependant utile pour produire un fichier HTML totalement <em>standalone</em> (incorporation des données liées telles que les images...) !</p>
+</dd>
+<dd><p>Usage du clavier et de la souris :</p>
+<ul>
+<li>curs-Droite, curs-Bas, PageDown : Passe au prochain point dans le slide</li>
+<li>curs-Gauche, curs-Haut, PageUp : Passe au précédent point dans le slide</li>
+</ul>
+</dd>
+<dt><code>-s -t revealjs -i --slide-level=level_number --self-contained</code></dt>
+<dd><p>Produit un slide show HTML au format <strong>Revealjs</strong>. 
+Incorpore dans le fichier HTML les données liées (images, codes 
+JavaScript et CSS...). Pour produire le slide show, il faut cependant 
+disposer, dans le dossier courant, d'un dossier reveal.js contenant les 
+ressources Revealjs nécessaires (à télécharger depuis ce <a href="https://github.com/hakimel/reveal.js/">lien</a>).</p>
+</dd>
+<dt><code>-t beamer</code></dt>
+<dd><p>Produit un slide show PDF basé LaTeX <strong>beamer</strong>.</p>
+</dd>
+</dl>
+<h1 id="editeurs_markdown"><a href="#editeurs_markdown"><span class="header-section-number">4</span> Quelques éditeurs adaptés à l'édition Markdown</a></h1>
+<p>Pour faciliter la rédaction et le confort de la lecture, vous avez 
+tout intérêt à utiliser un éditeur de texte supportant la coloration 
+syntaxique Markdown (<em>syntax highlighting</em>). Parmi les éditeurs libres ou gratuits, nous pouvons vous suggérer :</p>
+<ul>
+<li>sous GNU/Linux : Gedit, Geany, Atom, vim...</li>
+<li>sous Windows : Notepad++ avec ce <a href="https://github.com/thomsmits/markdown_npp">plugin</a>, Atom...</li>
+<li>sous Mac OS X : Atom, Sublime Text (avec divers packages Markdown/Pandoc), TextWrangler...</li>
+</ul>
+<p><strong>Sous Geany</strong></p>
+<p>On peut par exemple définir les commandes spécifiques suivantes sous Build &gt; Set Build Commands :</p>
+<ul>
+<li><p>commande par exemple nommée "Markdown to HTML" effectuant :<br> <code>pandoc -s -N --toc -c "%e".css -o "%e".html "%f"</code><br> et que l'on pourra alors utiliser avec Build &gt; Markdown to HTML (ou raccourci <code>&lt;F8&gt;</code>)</p></li>
+<li><p>commande par exemple nommée "HTML to PDF" effectuant :<br> <code>wkhtmltopdf "%e".html "%e".pdf</code> (présuppose l'installation du package <code>wkhtmltopdf</code>)<br> et que l'on pourra alors utiliser avec Build &gt; HTML to PDF (ou raccourci <code>&lt;F9&gt;</code>)</p></li>
+</ul>
+<p>Pour modifier éventuellement les raccourcis de ces commandes, aller 
+sous Edit&gt;Preferences, onglet "Keybindings", puis changer 
+respectivement les raccourcis Build&gt;Compile (c'est celui de MD to 
+HTML) et Build&gt;Build (celui de HTML to PDF).</p>
+<p>Notez qu'un <a href="https://github.com/geany/geany-plugins/tree/master/markdown">plugin</a>
+ spécifique Markdown permettrait sous Geany de faire de l'édition de 
+code Markdown dans une fenêtre tout en ayant le rendu HTML en temps réel
+ dans une autre fenêtre.</p>
+<p><strong>Sous Gedit</strong></p>
+<p>Il faut en premier lieu activer le plugin "External Tools" sous 
+Edit&gt;Preferences, dans l'onglet "Plugins". On peut ensuite par 
+exemple définir les commandes spécifiques suivantes sous Tools&gt;Manage
+ External Tools, avec le bouton <code>[+]</code> :</p>
+<ul>
+<li>Tools: Markdown to HTML<br> Shortcut Key: <code>&lt;F2&gt;</code><br> Save: Current document<br> Input: Nothing<br> Output: Display in bottom pane<br> Applicability: Local files only / Markdown<br> Edit:</li>
+</ul>
+<pre class="sourceCode bash"><code class="sourceCode bash">        <span class="co">#!/bin/sh</span>
+        <span class="ot">NOM_DOC=</span><span class="kw">`echo</span> <span class="ot">$GEDIT_CURRENT_DOCUMENT_NAME</span> <span class="kw">|</span> <span class="kw">sed</span> <span class="st">"s/\..*$//"</span><span class="kw">`</span>
+        <span class="kw">pandoc</span> -s -N --toc -c <span class="st">"%e"</span>.css -o <span class="st">"</span><span class="ot">$NOM_DOC</span><span class="st">"</span>.html <span class="st">"</span><span class="ot">$GEDIT_CURRENT_DOCUMENT_NAME</span><span class="st">"</span></code></pre>
+<ul>
+<li>Tools: HTML to PDF<br> Shortcut Key: <code>&lt;F3&gt;</code><br> Save: Current document<br> Input: Nothing<br> Output: Display in bottom pane<br> Applicability: Local files only / Markdown<br> Edit: (présuppose l'installation du package <code>wkhtmltopdf</code>)</li>
+</ul>
+<pre class="sourceCode bash"><code class="sourceCode bash">        <span class="co">#!/bin/sh</span>
+        <span class="ot">NOM_DOC=</span><span class="kw">`echo</span> <span class="ot">$GEDIT_CURRENT_DOCUMENT_NAME</span> <span class="kw">|</span> <span class="kw">sed</span> <span class="st">"s/\..*$//"</span><span class="kw">`</span>
+        <span class="kw">wkhtmltopdf</span> <span class="st">"</span><span class="ot">$NOM_DOC</span><span class="st">"</span>.html <span class="st">"</span><span class="ot">$NOM_DOC</span><span class="st">"</span>.pdf</code></pre>
+<p>&nbsp;</p>
+<hr>
+<p><a href="http://creativecommons.org/licenses/by-sa/3.0/deed.fr"><img src="%C3%89laboration%20et%20conversion%20de%20documents%20avec%20Markdown%20et%20Pandoc_files/cc-by-sa.png" title="CC BY-SA" alt="CC BY-SA"></a> <script type="text/javascript">
+<!--
+h='&#x65;&#112;&#102;&#108;&#46;&#x63;&#104;';a='&#64;';n='&#106;&#x65;&#x61;&#110;&#x2d;&#100;&#x61;&#110;&#x69;&#x65;&#108;&#46;&#98;&#x6f;&#110;&#106;&#x6f;&#x75;&#114;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<strong>Jean-Daniel Bonjour</strong>'+'<\/'+'a'+'>');
+// -->
+</script><a href="mailto:jean-daniel.bonjour@epfl.ch"><strong>Jean-Daniel Bonjour</strong></a><noscript>&#60;&#x73;&#116;&#114;&#x6f;&#110;&#x67;&#62;&#74;&#x65;&#x61;&#110;&#x2d;&#68;&#x61;&#110;&#x69;&#x65;&#108;&#32;&#66;&#x6f;&#110;&#106;&#x6f;&#x75;&#114;&#60;&#x2f;&#x73;&#116;&#114;&#x6f;&#110;&#x67;&#62;&#32;&#40;&#106;&#x65;&#x61;&#110;&#x2d;&#100;&#x61;&#110;&#x69;&#x65;&#108;&#46;&#98;&#x6f;&#110;&#106;&#x6f;&#x75;&#114;&#32;&#x61;&#116;&#32;&#x65;&#112;&#102;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#104;&#x29;</noscript>, EPFL, ENAC-IT (2013-2014) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (Page visitée <img src="%C3%89laboration%20et%20conversion%20de%20documents%20avec%20Markdown%20et%20Pandoc_files/Count.gif" border="0" align="absmiddle"> fois depuis le 1-12-2013)</p>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Markdown: <a href="http://daringfireball.net/projects/markdown/">http://daringfireball.net/projects/markdown/</a><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Pandoc: <a href="http://johnmacfarlane.net/pandoc/">http://johnmacfarlane.net/pandoc/</a><a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px none; margin: 0px;"><div style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px none; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-size-adjust: none; font-family: MathJax_Size4,sans-serif;" id="MathJax_Font_Test"></div></div></body></html>
