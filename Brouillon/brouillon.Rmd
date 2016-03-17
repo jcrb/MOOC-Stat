@@ -1,0 +1,35 @@
+---
+title: "Broullon"
+output: html_document
+---
+
+Travail avec smp2 (prison)
+==========================
+```{r}
+smp <- read.csv2("../mooc_stat/Data/smp2.csv")
+names(smp)
+```
+
+Etude de l'âge
+--------------
+```{r}
+hist(smp$age)
+qqnorm(smp$age)
+qqline(smp$age)
+
+```
+
+La distribution de l'âge est aproximativement normale avec une asymétrie imprtante. La courbe qqplt montre des écarts à la normalité aux ages extremes.
+
+Evitement du danger (ed)
+------------------------
+```{r}
+# 3 classes: 1, 2, 3
+# on crée une nouvelle variable en regroupant les niveaux 1 et 2
+smp$ed.b <- ifelse(smp$ed > 2, 1, 0)
+# comparaison des variances
+by(smp$age, as.factor(smp$ed.b), sd, na.rm = TRUE)
+
+```
+
+
