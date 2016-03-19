@@ -144,6 +144,44 @@ by(smp$age, as.factor(smp$ed.b), sd, na.rm = TRUE)</code></pre>
 ## -------------------------------------------------------- 
 ## as.factor(smp$ed.b): 1
 ## [1] 13.29636</code></pre>
+<p>la durée d’interview médiane chez les personnes diagnostiquées comme dépressives (dep.cons = 1) est supérieure à celle des personnes diagnostiquées comme non-dépressives (dep.cons = 0) de plus de :</p>
+<pre class="r"><code>tapply(smp$dur.interv, as.factor(smp$dep.cons), median, na.rm = TRUE)</code></pre>
+<pre><code>##  0  1 
+## 60 65</code></pre>
+<p>Donner la borne inférieure d’un intervalle de confiance à 95 % pour la corrélation linéaire (Pearson) entre les variables durée d’intervention (dur.interv) et âge (age) (3 chiffres après la virgule).</p>
+<pre class="r"><code>cor.test(smp$dur.interv, smp$age)</code></pre>
+<pre><code>## 
+##  Pearson's product-moment correlation
+## 
+## data:  smp$dur.interv and smp$age
+## t = 2.3487, df = 745, p-value = 0.0191
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.01408787 0.15650345
+## sample estimates:
+##        cor 
+## 0.08573358</code></pre>
+<p>Nous souhaitons vérifier si la durée d’interview (dur.interv) diffère sensiblement selon que les individus ont déjà effectué une tentative de suicide dans le passé ou non (suicide.past) à l’aide d’un test de Wilcoxon. Le degré de significativité du test est :</p>
+<pre class="r"><code>wilcox.test(smp$dur.interv, smp$suicide.past)</code></pre>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  smp$dur.interv and smp$suicide.past
+## W = 587460, p-value &lt; 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+<p>Quelle est la valeur de la statistique de test (c’est-à-dire la valeur du « t », que l’on donnera pour simplifier en valeur absolue) pour un test de Student comparant les durées moyennes d’intervention (dur.interv) selon le diagnostic de dépression (dep.cons). Nous supposerons l’égalité des variances dans les deux groupes (3 chiffres après la virgule).</p>
+<pre class="r"><code>t.test(smp$dur.interv ~ smp$dep.cons, var.equal = TRUE)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  smp$dur.interv by smp$dep.cons
+## t = -5.2583, df = 747, p-value = 1.9e-07
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -10.457001  -4.771515
+## sample estimates:
+## mean in group 0 mean in group 1 
+##        58.92341        66.53767</code></pre>
 </div>
 </div>
 
